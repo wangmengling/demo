@@ -27,9 +27,49 @@ class NewViewController: UIViewController {
         
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        
+        backGroundView.center.x -= self.view.bounds.width
+        replicatorBackView.center.x -= self.view.bounds.width
+        
+        self.bottomBackVie.center.y += 30
+        self.bottomBackVie.alpha = 0
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        UIView.animateWithDuration(0.5, animations: {
+            self.backGroundView.center.x += self.view.bounds.width
+        })
+        
+        UIView.animateWithDuration(0.5, delay: 0.3, options: [ .Autoreverse, .CurveEaseOut], animations: {
+            self.replicatorBackView.center.x += self.view.bounds.width
+        }, completion: nil)
+        
+//        let rotation = CGAffineTransformMakeRotation(CGFloat(M_PI))
+//        UIView.animateWithDuration(1, animations: {
+//            self.replicatorBackView.transform = rotation
+//        })
+
+        
+//let scale = CGAffineTransformMakeScale(0.5, 0.5)
+//UIView.animateWithDuration(1, animations: {
+//    self.replicatorBackView.transform = scale
+//})
+//        UIView.animateWithDuration(1, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .AllowUserInteraction, animations: {
+//            self.bottomBackVie.center.y -= 30
+//            self.bottomBackVie.alpha = 1
+//            }, completion: nil)
+        
+        
+//        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.0, options: .AllowUserInteraction, animations: {
+//            self.bottomBackVie.bounds.size.width += 25
+//            }, completion: nil)
         backGroundView.gradientLayer(textLabel,text: "我是独角兽")
+        
         self.replicator()
         
         self.loading()
