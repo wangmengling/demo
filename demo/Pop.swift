@@ -33,12 +33,12 @@ extension UIView {
         textAnimate(textLabel,text: text)
         gradientLayer.mask = textLabel.layer
         
-//        let gradient = CABasicAnimation(keyPath: "locations")
-//        gradient.fromValue = [0, 0, 0.25]
-//        gradient.toValue = [0.75, 1, 1]
-//        gradient.duration = 2.5
-//        gradient.repeatCount = HUGE
-//        gradientLayer.addAnimation(gradient, forKey: nil)
+        let gradient = CABasicAnimation(keyPath: "locations")
+        gradient.fromValue = [0, 0, 0.25]
+        gradient.toValue = [0.75, 1, 1]
+        gradient.duration = 2.5
+        gradient.repeatCount = HUGE
+        gradientLayer.addAnimation(gradient, forKey: nil)
         
         return gradientLayer
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iYN-Yg-zCS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iYN-Yg-zCS">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -88,15 +88,37 @@
                                     <constraint firstAttribute="trailing" secondItem="k7T-6F-uKX" secondAttribute="trailing" id="ug4-hi-IHL"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ha7-bS-YBZ">
+                                <rect key="frame" x="180" y="320" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.19215686269999999" green="0.63529411759999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="1mC-gE-Jn1"/>
+                                    <constraint firstAttribute="width" constant="240" id="Qfy-FN-dQM"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tB-zK-I9J">
+                                <rect key="frame" x="235" y="456" width="130" height="130"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="DL9-P4-tOe"/>
+                                    <constraint firstAttribute="height" constant="130" id="lyd-a4-3au"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1ok-Jl-oUn" firstAttribute="centerY" secondItem="U9D-TF-AW7" secondAttribute="centerY" constant="-116" id="3GI-RL-j18"/>
+                            <constraint firstItem="7tB-zK-I9J" firstAttribute="centerY" secondItem="U9D-TF-AW7" secondAttribute="centerY" constant="221" id="5sa-RV-jtz"/>
+                            <constraint firstItem="Ha7-bS-YBZ" firstAttribute="centerX" secondItem="U9D-TF-AW7" secondAttribute="centerX" id="XBa-gU-qlb"/>
+                            <constraint firstItem="Ha7-bS-YBZ" firstAttribute="centerY" secondItem="U9D-TF-AW7" secondAttribute="centerY" constant="84" id="YMZ-9W-3p5"/>
                             <constraint firstItem="1ok-Jl-oUn" firstAttribute="centerX" secondItem="U9D-TF-AW7" secondAttribute="centerX" id="b4g-vv-jMr"/>
+                            <constraint firstItem="7tB-zK-I9J" firstAttribute="centerX" secondItem="U9D-TF-AW7" secondAttribute="centerX" id="eK5-HY-gCX"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backGroundView" destination="1ok-Jl-oUn" id="lr3-xL-aK4"/>
+                        <outlet property="bottomBackVie" destination="7tB-zK-I9J" id="FqK-9I-nOZ"/>
+                        <outlet property="replicatorBackView" destination="Ha7-bS-YBZ" id="tGg-Od-vRm"/>
                         <outlet property="textLabel" destination="k7T-6F-uKX" id="w2g-Ij-17r"/>
                     </connections>
                 </viewController>
