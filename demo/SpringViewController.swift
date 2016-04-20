@@ -32,6 +32,7 @@ class SpringViewController: UIViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.containerView.addSubview(self.ipadView)
+        self.hiddenNavigation()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -39,12 +40,12 @@ class SpringViewController: UIViewController {
         
         ipadView.image = UIImage(named: "top-back_")
         
-        UIView.transitionWithView(self.imageView, duration: 1.5, options: .TransitionFlipFromBottom, animations: {
-//            self.view.addSubview(self.ipadView)
-        }, completion: nil)
-        UIView.transitionWithView(self.image2View, duration: 1.5, options: .TransitionFlipFromBottom, animations: {
-            //            self.view.addSubview(self.ipadView)
-            }, completion: nil)
+//        UIView.transitionWithView(self.imageView, duration: 1.5, options: .TransitionFlipFromBottom, animations: {
+////            self.view.addSubview(self.ipadView)
+//        }, completion: nil)
+//        UIView.transitionWithView(self.image2View, duration: 1.5, options: .TransitionFlipFromBottom, animations: {
+//            //            self.view.addSubview(self.ipadView)
+//            }, completion: nil)
         
 //        UIView.transitionWithView(self.label, duration: 2, options: [.CurveEaseOut, .TransitionCrossDissolve], animations: {
 ////            self.textContainerView.addSubview(self.textView)
@@ -53,6 +54,48 @@ class SpringViewController: UIViewController {
         
         
         
+//        UIView.animateKeyframesWithDuration(2, delay: 0, options: [], animations: {
+//            // add keyframes
+//            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0.25, animations: {
+//                self.view.center.x += 200.0
+//            })
+//            UIView.addKeyframeWithRelativeStartTime(0.25, relativeDuration: 0.25, animations: {
+//                self.view.center.y += 100.0
+//            })
+//            UIView.addKeyframeWithRelativeStartTime(0.5, relativeDuration: 0.25, animations: {
+//                self.view.center.x -= 200.0
+//            })
+//            UIView.addKeyframeWithRelativeStartTime(0.75, relativeDuration: 0.25, animations: {
+//                self.view.center.y -= 100.0
+//            })
+//            }, completion: nil)
+        
+        
+        let zoomInScaleTransform = CGAffineTransformMakeScale(0.2, 0.2)
+        UIView.animateKeyframesWithDuration(3, delay: 0, options: [], animations: {
+            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0.2, animations: {
+                self.containerView.center.x += self.view.frame.width
+                self.containerView.center.y += -180
+                self.containerView.transform = zoomInScaleTransform
+            })
+            UIView.addKeyframeWithRelativeStartTime(0.3, relativeDuration: 0.01, animations: {
+                self.containerView.alpha = 1
+                self.containerView.transform = zoomInScaleTransform
+            })
+            UIView.addKeyframeWithRelativeStartTime(0.3, relativeDuration: 0.5, animations: {
+                self.containerView.transform = CGAffineTransformIdentity
+                self.containerView.center.x -= self.view.frame.width
+                self.containerView.center.y += 90
+            })
+            UIView.addKeyframeWithRelativeStartTime(0.9, relativeDuration: 0.01, animations: {
+                self.containerView.alpha = 1
+            })
+            UIView.addKeyframeWithRelativeStartTime(0.9, relativeDuration: 0.2, animations: {
+                self.containerView.center.x += 33
+            })
+            }, completion: { _ in
+//                self.restorePaperAirplaneStatus()
+        })
     }
     
     
@@ -121,5 +164,12 @@ class SpringViewController: UIViewController {
 //                    UIView.transitionFromView(self.webContainerView, toView: self.supportWeb, duration: 0.33, options: .TransitionCrossDissolve, completion: nil)
 //                }
 //        })
+    }
+}
+
+extension SpringViewController {
+    func hiddenNavigation(){
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default) //设置导航栏北京
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
 }

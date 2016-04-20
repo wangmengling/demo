@@ -17,6 +17,7 @@
 		16198EEB1CC50A010078919A /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16198EEA1CC50A010078919A /* NewViewController.swift */; };
 		16CBE3891CC5135C00A3699F /* Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CBE3881CC5135C00A3699F /* Pop.swift */; };
 		18092AD41CC625EC00E74EBD /* SpringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18092AD31CC625EC00E74EBD /* SpringViewController.swift */; };
+		18092AD61CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18092AD51CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		16198EEA1CC50A010078919A /* NewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
 		16CBE3881CC5135C00A3699F /* Pop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pop.swift; sourceTree = "<group>"; };
 		18092AD31CC625EC00E74EBD /* SpringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringViewController.swift; sourceTree = "<group>"; };
+		18092AD51CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorHiddenTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				16198EBE1CC507990078919A /* ViewController.swift */,
 				16198EEA1CC50A010078919A /* NewViewController.swift */,
 				18092AD31CC625EC00E74EBD /* SpringViewController.swift */,
+				18092AD51CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift */,
 				16CBE3881CC5135C00A3699F /* Pop.swift */,
 				16198EC01CC507990078919A /* Main.storyboard */,
 				16198EC31CC507990078919A /* Assets.xcassets */,
@@ -202,6 +205,7 @@
 				TargetAttributes = {
 					16198EB81CC507990078919A = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = TKPTNL5H7G;
 					};
 					16198ECC1CC507990078919A = {
 						CreatedOnToolsVersion = 7.3;
@@ -270,6 +274,7 @@
 				16198EBD1CC507990078919A /* AppDelegate.swift in Sources */,
 				18092AD41CC625EC00E74EBD /* SpringViewController.swift in Sources */,
 				16CBE3891CC5135C00A3699F /* Pop.swift in Sources */,
+				18092AD61CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,7 +418,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wang.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -424,7 +431,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wang.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
