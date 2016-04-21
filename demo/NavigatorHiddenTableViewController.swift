@@ -24,6 +24,10 @@ class NavigatorHiddenTableViewController: UITableViewController {
         self.navigationController?.navigationItem.prompt = "sfasdf"
         self.navigationItem.title = "sfdaadfasdf"
         self.navigationController?.navigationBarHidden = true
+        self.automaticallyAdjustsScrollViewInsets = false
+//        self.tableView.contentInset =  UIEdgeInsetsMake(-64, 0, 0, 0)
+//        self.tableView.contentMode
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
     }
 
     override func didReceiveMemoryWarning() {
@@ -102,49 +106,20 @@ class NavigatorHiddenTableViewController: UITableViewController {
 extension NavigatorHiddenTableViewController {
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
-//        if ([self getScrollerView]){
-//            
-//            UIScrollView * scrollerView = [self getScrollerView];
-//            alpha =  scrollerView.contentOffset.y/self.scrolOffsetY;
-//        }else{
-//            return;
-//        }
-//        alpha = (alpha <= 0)?0:alpha;
-//        alpha = (alpha >= 1)?1:alpha;
-//        
-//        //设置导航条上的标签是否跟着透明
-//        self.navigationItem.leftBarButtonItem.customView.alpha = self.isLeftAlpha?alpha:1;
-//        self.navigationItem.titleView.alpha = self.isTitleAlpha?alpha:1;
-//        self.navigationItem.rightBarButtonItem.customView.alpha = self.isRightAlpha?alpha:1;
-//        
-//        [[[self.navigationController.navigationBar subviews]objectAtIndex:0] setAlpha:alpha];
         self.navigationController?.navigationBarHidden = false
         var alpha = scrollView.contentOffset.y/64
         alpha = (alpha <= 0) ? 0 : alpha
         alpha = (alpha >= 1) ? 1 : alpha
+        self.navigationController?.navigationBar.subviews.map({ (view) -> Void in
+            view.alpha = true ? alpha : 1
+        })
         
-        self.navigationItem.leftBarButtonItem?.customView?.alpha = true ? alpha : 1
-        self.navigationItem.titleView?.alpha = 0.1
-        self.navigationItem.rightBarButtonItem?.customView?.alpha = true ? alpha : 1
-        self.navigationController?.navigationBar.subviews[0].alpha = true ? alpha : 1
-        let nv = self.navigationController?.navigationBar.subviews
-        print(nv)
-        let nvc = self.navigationController?.navigationBar
-        print(nvc)
-        let s = self.navigationItem.backBarButtonItem
-        let d = self.navigationController?.navigationItem.backBarButtonItem
-        let sdf = self.navigationController?.navigationBar
-        print(sdf)
-        if s === d {
-            print("asdfasdf")
-        }
-//        self.navigationItem.te
     }
     
-    func navigation()  {
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.tableView.contentOffset = CGPointMake(0, self.tableView.contentOffset.y - 1);
-        self.tableView.contentOffset = CGPointMake(0, self.tableView.contentOffset.y + 1);
-    }
+//    func navigation()  {
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.tableView.contentOffset = CGPointMake(0, self.tableView.contentOffset.y - 1);
+//        self.tableView.contentOffset = CGPointMake(0, self.tableView.contentOffset.y + 1);
+//    }
 }

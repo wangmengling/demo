@@ -142,6 +142,10 @@ class NewViewController: UIViewController {
         scale.duration = 1
         scale.repeatCount = HUGE
         circle.addAnimation(scale, forKey: nil)
+        
+        
+        let ca = CAAnimation()
+        
     }
     
 
