@@ -14,7 +14,7 @@ enum Method: String {
 }
 
 /**
- *  <#Description#>
+ *  网络请求
  */
 struct NetWork {
     static func request(method: Method, url: String, params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>(), callback: (data: AnyObject!, response: NSURLResponse!, error: NSError!) -> Void) {
@@ -23,6 +23,7 @@ struct NetWork {
     }
 }
 
+// MARK: - session
 struct NetWorkManager {
     
     //NSMutableURLRequest
@@ -45,10 +46,9 @@ struct NetWorkManager {
         self.request = NSMutableURLRequest(URL: NSURL(string: url)!)
     }
     
+    //请求并异步返回数据
     mutating func fireTask() {
         task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-            
-//            self.callback(data: data, response: response, error: error)
             let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
             self.callback(data: json, response: response, error: error)
         })

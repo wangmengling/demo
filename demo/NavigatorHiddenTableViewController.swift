@@ -122,6 +122,8 @@ extension NavigatorHiddenTableViewController {
         NetWork.request(.GET, url: "https://cnodejs.org/api/v1/topics") { (data, response, error) in
             print(data)
         }
+        
+        
         Alamofire.request(.GET, "https://cnodejs.org/api/v1/topics").responseJSON { (reponse) in
             
         }
