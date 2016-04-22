@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class NavigatorHiddenTableViewController: UITableViewController {
 
@@ -27,7 +28,9 @@ class NavigatorHiddenTableViewController: UITableViewController {
         self.automaticallyAdjustsScrollViewInsets = false
 //        self.tableView.contentInset =  UIEdgeInsetsMake(-64, 0, 0, 0)
 //        self.tableView.contentMode
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        
+        self.getCNodeOrgTopics()
     }
 
     override func didReceiveMemoryWarning() {
@@ -113,13 +116,14 @@ extension NavigatorHiddenTableViewController {
         self.navigationController?.navigationBar.subviews.map({ (view) -> Void in
             view.alpha = true ? alpha : 1
         })
-        
     }
     
-//    func navigation()  {
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.tableView.contentOffset = CGPointMake(0, self.tableView.contentOffset.y - 1);
-//        self.tableView.contentOffset = CGPointMake(0, self.tableView.contentOffset.y + 1);
-//    }
+    func getCNodeOrgTopics() -> Void {
+        NetWork.request(.GET, url: "https://cnodejs.org/api/v1/topics") { (data, response, error) in
+            print(data)
+        }
+        Alamofire.request(.GET, "https://cnodejs.org/api/v1/topics").responseJSON { (reponse) in
+            
+        }
+    }
 }
