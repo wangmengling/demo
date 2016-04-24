@@ -15,6 +15,7 @@
 		16198ED21CC507990078919A /* demoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16198ED11CC507990078919A /* demoTests.swift */; };
 		16198EDD1CC507990078919A /* demoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16198EDC1CC507990078919A /* demoUITests.swift */; };
 		16198EEB1CC50A010078919A /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16198EEA1CC50A010078919A /* NewViewController.swift */; };
+		16C503AC1CCB63C900D074ED /* StoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C503AB1CCB63C900D074ED /* StoreModel.swift */; };
 		16CBE3891CC5135C00A3699F /* Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CBE3881CC5135C00A3699F /* Pop.swift */; };
 		18092AD41CC625EC00E74EBD /* SpringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18092AD31CC625EC00E74EBD /* SpringViewController.swift */; };
 		18092AD61CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18092AD51CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift */; };
@@ -56,6 +57,7 @@
 		16198EDC1CC507990078919A /* demoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demoUITests.swift; sourceTree = "<group>"; };
 		16198EDE1CC507990078919A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16198EEA1CC50A010078919A /* NewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
+		16C503AB1CCB63C900D074ED /* StoreModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreModel.swift; sourceTree = "<group>"; };
 		16CBE3881CC5135C00A3699F /* Pop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pop.swift; sourceTree = "<group>"; };
 		18092AD31CC625EC00E74EBD /* SpringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringViewController.swift; sourceTree = "<group>"; };
 		18092AD51CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorHiddenTableViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				16CBE3881CC5135C00A3699F /* Pop.swift */,
 				182A0ADD1CC9F35700A49759 /* NetWork.swift */,
 				18FC68A31CCA2AEB005C512D /* UserModel.swift */,
+				16C503AB1CCB63C900D074ED /* StoreModel.swift */,
 				18FC68A11CCA2619005C512D /* JsonModel.swift */,
 				16198EC01CC507990078919A /* Main.storyboard */,
 				16198EC31CC507990078919A /* Assets.xcassets */,
@@ -362,6 +365,7 @@
 				16CBE3891CC5135C00A3699F /* Pop.swift in Sources */,
 				18FC68A41CCA2AEB005C512D /* UserModel.swift in Sources */,
 				18092AD61CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift in Sources */,
+				16C503AC1CCB63C900D074ED /* StoreModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

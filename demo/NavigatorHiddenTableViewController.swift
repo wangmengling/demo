@@ -47,7 +47,7 @@ class NavigatorHiddenTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 20
+        return 2
     }
 
     
@@ -120,12 +120,33 @@ extension NavigatorHiddenTableViewController {
     
     func getCNodeOrgTopics() -> Void {
         NetWork.request(.GET, url: "https://cnodejs.org/api/v1/topics") { (data, response, error) in
-            print(data)
+//            print(data)
+            self.jsonToModel(StoreModel(), json: data)
         }
         
         
         Alamofire.request(.GET, "https://cnodejs.org/api/v1/topics").responseJSON { (reponse) in
             
         }
+    }
+    
+    @IBAction func clickAction(sender: AnyObject) {
+        self.mirrorModel()
+    }
+    func mirrorModel() -> AnyObject? {
+        
+        return nil
+    }
+    
+    func jsonToModel(model:Any, json:AnyObject) -> Any {
+        let mirror = Mirror(reflecting: model)
+        
+        let mirrorModel = mirror.children.map { (child) -> Any in
+            var childMirror = child
+            childMirror.value = json.objectForKey(childMirror.label)
+            return childMirror
+        }
+        
+        return mirrorModel
     }
 }

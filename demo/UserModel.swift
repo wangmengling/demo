@@ -8,6 +8,10 @@
 
 import Foundation
 struct UserModel: JsonModelProtocol{
-    let Name: String!
+    var Name: String!
     var PassWord: String!
+    
+    init(){
+        
+    }
 }
