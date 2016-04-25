@@ -149,6 +149,7 @@ extension NavigatorHiddenTableViewController {
         mirror.children.map { (child) -> Void in
             let value:AnyObject? = json.objectForKey(child.label!)
             model.setValue(value, forKey: child.label!)
+            
         }
         return model
     }
