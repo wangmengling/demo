@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 
+
 class NavigatorHiddenTableViewController: UITableViewController {
 
     override func viewDidLoad() {
@@ -109,24 +110,22 @@ class NavigatorHiddenTableViewController: UITableViewController {
 extension NavigatorHiddenTableViewController {
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
-        self.navigationController?.navigationBarHidden = false
-        var alpha = scrollView.contentOffset.y/64
-        alpha = (alpha <= 0) ? 0 : alpha
-        alpha = (alpha >= 1) ? 1 : alpha
-        self.navigationController?.navigationBar.subviews.map({ (view) -> Void in
-            view.alpha = true ? alpha : 1
-        })
+//        self.navigationController?.navigationBarHidden = false
+//        var alpha = scrollView.contentOffset.y/64
+//        alpha = (alpha <= 0) ? 0 : alpha
+//        alpha = (alpha >= 1) ? 1 : alpha
+//        self.navigationController?.navigationBar.subviews.map({ (view) -> Void in
+//            view.alpha = true ? alpha : 1
+//        })
     }
     
     func getCNodeOrgTopics() -> Void {
         NetWork.request(.GET, url: "https://cnodejs.org/api/v1/topics") { (data, response, error) in
 //            print(data)
-            self.jsonToModel(StoreModel(), json: data)
-        }
-        
-        
-        Alamofire.request(.GET, "https://cnodejs.org/api/v1/topics").responseJSON { (reponse) in
+//            self.jsonToModelArray(StoreModel(), json: data["data"])
             
+            let array = self.jsonToModelArray(TopicsModel(), json: data.objectForKey("data")! as! Array<AnyObject>)
+            print(array.count)
         }
     }
     
@@ -134,19 +133,25 @@ extension NavigatorHiddenTableViewController {
         self.mirrorModel()
     }
     func mirrorModel() -> AnyObject? {
-        
         return nil
     }
     
-    func jsonToModel(model:Any, json:AnyObject) -> Any {
-        let mirror = Mirror(reflecting: model)
-        
-        let mirrorModel = mirror.children.map { (child) -> Any in
-            var childMirror = child
-            childMirror.value = json.objectForKey(childMirror.label)
-            return childMirror
+    func jsonToModelArray(model:AnyObject, json:Array<AnyObject>) -> Array<Any> {
+        let jsonToModelArray = json.map { (singleJson) -> Any in
+            let singleJsonModel = self.jsonToModel(model,json: singleJson)
+            return singleJsonModel
         }
-        
-        return mirrorModel
+        return jsonToModelArray
+    }
+    
+    func jsonToModel(model:AnyObject, json:AnyObject) -> AnyObject {
+        let mirror = Mirror(reflecting: model)
+        mirror.children.map { (child) -> Void in
+            let value:AnyObject? = json.objectForKey(child.label!)
+            model.setValue(value, forKey: child.label!)
+        }
+        return model
     }
 }
+
+

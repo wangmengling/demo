@@ -7,11 +7,8 @@
 //
 
 import Foundation
-struct UserModel: JsonModelProtocol{
+import Genome
+struct UserModel:BasicMappable{
     var Name: String!
     var PassWord: String!
-    
-    init(){
-        
-    }
 }

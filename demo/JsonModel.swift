@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol JsonModelProtocol {
-    func setValue(value: AnyObject?, forKey key: String)
+public protocol JsonModelProtocol {
+    
 }
 
 extension JsonModelProtocol {
@@ -19,7 +19,29 @@ extension JsonModelProtocol {
 }
 
 struct JsonModel {
-    static func jsonToModel(model:JsonModelProtocol) {
-        
+    
+    func jsonToModelArray(model:AnyObject, json:Array<AnyObject>) -> Array<Any> {
+        let jsonToModelArray = json.map { (singleJson) -> Any in
+            let singleJsonModel = self.jsonToModel(model,json: singleJson)
+            return singleJsonModel
+        }
+        return jsonToModelArray
+    }
+    
+    func jsonToModel(model:AnyObject, json:AnyObject) -> AnyObject {
+        let mirror = Mirror(reflecting: model)
+        mirror.children.map { (child) -> Void in
+            let value:AnyObject? = json.objectForKey(child.label!)
+            model.setValue(value, forKey: child.label!)
+        }
+        return model
+    }
+    
+    init(model:AnyObject, json:AnyObject){
+        if json.type == "Array" {
+            self.jsonToModelArray(model, json: json as! Array<AnyObject>)
+        } else {
+            self.jsonToModel(model, json: json)
+        }
     }
 }

@@ -67,7 +67,7 @@ extension NetWorkManager {
         if self.method == .GET && self.params.count > 0 {
             self.request = NSMutableURLRequest(URL: NSURL(string: url + "?" + buildParams(self.params))!)
         }
-        
+         
         request.HTTPMethod = self.method.rawValue
         
         if self.params.count > 0 {
