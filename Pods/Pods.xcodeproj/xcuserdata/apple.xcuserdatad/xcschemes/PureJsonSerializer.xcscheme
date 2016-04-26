@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'B0C94572480730D939EC4B41'
+               BlueprintIdentifier = 'A2D0BABE8DCA944450F5B57B'
                BlueprintName = 'PureJsonSerializer'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'PureJsonSerializer.framework'>

@@ -11,7 +11,8 @@ import Alamofire
 
 
 class NavigatorHiddenTableViewController: UITableViewController {
-
+    var topicModelArray:Array<Any> = Array<Any>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,16 +22,13 @@ class NavigatorHiddenTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-//        self.title = "我的公司"
-//        self.navigationItem.prompt="这是什么？"
+        self.title = "我的公司"
         self.navigationController?.navigationItem.prompt = "sfasdf"
         self.navigationItem.title = "sfdaadfasdf"
         self.navigationController?.navigationBarHidden = true
         self.automaticallyAdjustsScrollViewInsets = false
-//        self.tableView.contentInset =  UIEdgeInsetsMake(-64, 0, 0, 0)
-//        self.tableView.contentMode
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 114
         self.getCNodeOrgTopics()
     }
 
@@ -48,15 +46,15 @@ class NavigatorHiddenTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        return self.topicModelArray.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("NavigatorHiddenTableViewCell", forIndexPath: indexPath) as! NavigatorHiddenTableViewCell
 
         // Configure the cell...
-
+        cell.topicsModel = self.topicModelArray[indexPath.row] as? TopicsModel
         return cell
     }
 
@@ -124,8 +122,10 @@ extension NavigatorHiddenTableViewController {
 //            print(data)
 //            self.jsonToModelArray(StoreModel(), json: data["data"])
             
-            let array = self.jsonToModelArray(TopicsModel(), json: data.objectForKey("data")! as! Array<AnyObject>)
-            print(array.count)
+            self.topicModelArray = JsonModel().jsonToModelArray(TopicsModel(), json: data.objectForKey("data")! as! Array<AnyObject>)
+//            self.topicModelArray = array as! Array<TopicsModel>
+//            self.jsonToModelArray(TopicsModel.self, json: data.objectForKey("data")! as! Array<AnyObject>)
+            self.tableView.reloadData()
         }
     }
     
@@ -136,20 +136,20 @@ extension NavigatorHiddenTableViewController {
         return nil
     }
     
-    func jsonToModelArray(model:AnyObject, json:Array<AnyObject>) -> Array<Any> {
+    func jsonToModelArray(model:AnyClass, json:Array<AnyObject>) -> Array<Any> {
         let jsonToModelArray = json.map { (singleJson) -> Any in
-            let singleJsonModel = self.jsonToModel(model,json: singleJson)
+            let singleJsonModel = self.jsonToModel(model, json: singleJson)
             return singleJsonModel
         }
         return jsonToModelArray
     }
     
-    func jsonToModel(model:AnyObject, json:AnyObject) -> AnyObject {
-        let mirror = Mirror(reflecting: model)
+    func jsonToModel(model:AnyClass, json:AnyObject) -> AnyObject {
+        let obj = model as AnyObject.Type
+        let mirror = Mirror(reflecting: obj)
         mirror.children.map { (child) -> Void in
             let value:AnyObject? = json.objectForKey(child.label!)
-            model.setValue(value, forKey: child.label!)
-            
+            obj.setValue(value, forKey: child.label!)
         }
         return model
     }

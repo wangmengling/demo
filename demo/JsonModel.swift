@@ -12,12 +12,6 @@ public protocol JsonModelProtocol {
     
 }
 
-extension JsonModelProtocol {
-    func setValue(value: AnyObject?, forKey key: String)  {
-        
-    }
-}
-
 struct JsonModel {
     
     func jsonToModelArray(model:AnyObject, json:Array<AnyObject>) -> Array<Any> {
@@ -28,20 +22,21 @@ struct JsonModel {
         return jsonToModelArray
     }
     
-    func jsonToModel(model:AnyObject, json:AnyObject) -> AnyObject {
+    func jsonToModel(model:AnyObject, json:AnyObject) -> AnyObject? {
         let mirror = Mirror(reflecting: model)
+        let modelString = NSStringFromClass(model.classForCoder)
+        guard let cls = NSClassFromString(modelString) as? NSObject.Type else {
+            return nil
+        }
+        let obj = cls.init()
         mirror.children.map { (child) -> Void in
             let value:AnyObject? = json.objectForKey(child.label!)
-            model.setValue(value, forKey: child.label!)
+            obj.setValue(value, forKey: child.label!)
         }
-        return model
+        return obj
     }
     
-    init(model:AnyObject, json:AnyObject){
-        if json.type == "Array" {
-            self.jsonToModelArray(model, json: json as! Array<AnyObject>)
-        } else {
-            self.jsonToModel(model, json: json)
-        }
+    init(){
+        
     }
 }
