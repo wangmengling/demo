@@ -26,5 +26,8 @@ class NavigatorHiddenTableViewCell: UITableViewCell {
     override func layoutSubviews() {
 //        self.avatarImageView.image = UIImage()
         self.titleLabel.text = self.topicsModel?.title
+        MLImageDowloader.defaultDownloader.downloaderImage(NSURL(string: "http://upload.jianshu.io/users/upload_avatars/1170347/1b89e007629e?imageMogr/thumbnail/90x90/quality/100")!) { (image, error, imageURL, originalData) in
+            
+        }
     }
 }
