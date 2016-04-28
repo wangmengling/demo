@@ -130,29 +130,8 @@ extension NavigatorHiddenTableViewController {
     }
     
     @IBAction func clickAction(sender: AnyObject) {
-        self.mirrorModel()
-    }
-    func mirrorModel() -> AnyObject? {
-        return nil
     }
     
-    func jsonToModelArray(model:AnyClass, json:Array<AnyObject>) -> Array<Any> {
-        let jsonToModelArray = json.map { (singleJson) -> Any in
-            let singleJsonModel = self.jsonToModel(model, json: singleJson)
-            return singleJsonModel
-        }
-        return jsonToModelArray
-    }
-    
-    func jsonToModel(model:AnyClass, json:AnyObject) -> AnyObject {
-        let obj = model as AnyObject.Type
-        let mirror = Mirror(reflecting: obj)
-        mirror.children.map { (child) -> Void in
-            let value:AnyObject? = json.objectForKey(child.label!)
-            obj.setValue(value, forKey: child.label!)
-        }
-        return model
-    }
 }
 
 

@@ -104,6 +104,7 @@ class MLImageDownloaderSessionHandler: NSObject,NSURLSessionDataDelegate {
         self.callBackImage(task)
     }
     
+    
     /**
      This method is exposed since the compiler requests. Do not call it.
      */
@@ -112,6 +113,6 @@ class MLImageDownloaderSessionHandler: NSObject,NSURLSessionDataDelegate {
     }
     
     func callBackImage(task:NSURLSessionTask) {
-        
+//        let image = UIImage().ml_image(task, scale: <#T##CGFloat#>)
     }
 }

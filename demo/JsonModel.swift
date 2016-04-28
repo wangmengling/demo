@@ -31,7 +31,21 @@ struct JsonModel {
         let obj = cls.init()
         mirror.children.map { (child) -> Void in
             let value:AnyObject? = json.objectForKey(child.label!)
-            obj.setValue(value, forKey: child.label!)
+            let type = child.value.dynamicType
+            if type is Optional<AuthorModel>.Type {
+                
+            }
+            if type is Optional<String>.Type {
+                print(child)
+            }
+            
+            if child.value.dynamicType is JsonModelProtocol {
+                if let childModel = NSClassFromString(modelString) as? NSObject.Type {
+                    self.jsonToModel(childModel, json: value!)
+                }
+            }else{
+                obj.setValue(value, forKey: child.label!)
+            }
         }
         return obj
     }
