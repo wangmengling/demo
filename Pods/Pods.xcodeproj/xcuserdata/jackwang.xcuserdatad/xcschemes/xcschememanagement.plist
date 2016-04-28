@@ -9,10 +9,25 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>Genome.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Kingfisher.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
+		</dict>
+		<key>PureJsonSerializer.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -22,7 +37,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>62EF934DFDF23D6161DB80618D895BAF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6FDB04CA2B2CD10ED87CAB2478B693E5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CB487C2E8B76EEA7B23C9ED3B1D8D07B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F91226101ECE8FCFD221A3EC54481F82</key>
 		<dict>
 			<key>primary</key>
 			<true/>

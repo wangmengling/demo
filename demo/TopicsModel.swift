@@ -19,9 +19,9 @@ class TopicsModel:NSObject,JsonModelProtocol {
     var top:Bool = false
 //    var avatar_url:String? = "" //avatar_url":"https://avatars.githubusercontent.com/u/1147375?v=3&s=120"
     
+    func setupReplaceObjectClass() -> [String : String] {
+        return ["author": "AuthorModel"]
+    }
 }
 
-class AuthorModel: NSObject,JsonModelProtocol {
-    var avatar_url: String?
-    var loginname: String?
-}
+

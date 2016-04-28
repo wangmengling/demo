@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import Genome
-struct UserModel:BasicMappable{
+struct UserModel{
     var Name: String!
     var PassWord: String!
 }

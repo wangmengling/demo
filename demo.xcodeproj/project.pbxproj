@@ -15,6 +15,7 @@
 		16198ED21CC507990078919A /* demoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16198ED11CC507990078919A /* demoTests.swift */; };
 		16198EDD1CC507990078919A /* demoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16198EDC1CC507990078919A /* demoUITests.swift */; };
 		16198EEB1CC50A010078919A /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16198EEA1CC50A010078919A /* NewViewController.swift */; };
+		16BFD6871CD257AF00EB70F5 /* AuthorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BFD6861CD257AF00EB70F5 /* AuthorModel.swift */; };
 		16C503AC1CCB63C900D074ED /* StoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C503AB1CCB63C900D074ED /* StoreModel.swift */; };
 		16CBE3891CC5135C00A3699F /* Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CBE3881CC5135C00A3699F /* Pop.swift */; };
 		18092AD41CC625EC00E74EBD /* SpringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18092AD31CC625EC00E74EBD /* SpringViewController.swift */; };
@@ -63,6 +64,7 @@
 		16198EDC1CC507990078919A /* demoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demoUITests.swift; sourceTree = "<group>"; };
 		16198EDE1CC507990078919A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16198EEA1CC50A010078919A /* NewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
+		16BFD6861CD257AF00EB70F5 /* AuthorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorModel.swift; sourceTree = "<group>"; };
 		16C503AB1CCB63C900D074ED /* StoreModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreModel.swift; sourceTree = "<group>"; };
 		16CBE3881CC5135C00A3699F /* Pop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pop.swift; sourceTree = "<group>"; };
 		18092AD31CC625EC00E74EBD /* SpringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				16C503AB1CCB63C900D074ED /* StoreModel.swift */,
 				181477A81CCDBFDA00481D54 /* TopicsModel.swift */,
 				18FC68A11CCA2619005C512D /* JsonModel.swift */,
+				16BFD6861CD257AF00EB70F5 /* AuthorModel.swift */,
 				18DC9A041CD06194000D4C6B /* MLImageDowload */,
 				16198EC01CC507990078919A /* Main.storyboard */,
 				16198EC31CC507990078919A /* Assets.xcassets */,
@@ -398,6 +401,7 @@
 				18DC9A0A1CD0917E000D4C6B /* MLImageDowloader.swift in Sources */,
 				16C503AC1CCB63C900D074ED /* StoreModel.swift in Sources */,
 				18DC9A031CCF4E6B000D4C6B /* NavigatorHiddenTableViewCell.swift in Sources */,
+				16BFD6871CD257AF00EB70F5 /* AuthorModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -54,6 +54,7 @@ class NavigatorHiddenTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("NavigatorHiddenTableViewCell", forIndexPath: indexPath) as! NavigatorHiddenTableViewCell
 
         // Configure the cell...
+        print(self.topicModelArray[indexPath.row] as? TopicsModel)
         cell.topicsModel = self.topicModelArray[indexPath.row] as? TopicsModel
         return cell
     }
@@ -122,7 +123,7 @@ extension NavigatorHiddenTableViewController {
 //            print(data)
 //            self.jsonToModelArray(StoreModel(), json: data["data"])
             
-            self.topicModelArray = JsonModel().jsonToModelArray(TopicsModel(), json: data.objectForKey("data")! as! Array<AnyObject>)
+            self.topicModelArray = JsonModel().jsonToModelArray(TopicsModel.self, json: data.objectForKey("data")! as! Array<AnyObject>)
 //            self.topicModelArray = array as! Array<TopicsModel>
 //            self.jsonToModelArray(TopicsModel.self, json: data.objectForKey("data")! as! Array<AnyObject>)
             self.tableView.reloadData()

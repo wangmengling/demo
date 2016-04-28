@@ -9,13 +9,25 @@
 import Foundation
 
 public protocol JsonModelProtocol {
-    
+    func setupReplaceObjectClass() -> [String: String]
+}
+
+extension JsonModelProtocol {
+    func setupReplaceObjectClass() -> [String: String] {
+        return [:]
+    }
 }
 
 struct JsonModel {
     
-    func jsonToModelArray(model:AnyObject, json:Array<AnyObject>) -> Array<Any> {
+    
+    
+    func jsonToModelArray(modelClass:AnyClass, json:Array<AnyObject>) -> Array<Any> {
         let jsonToModelArray = json.map { (singleJson) -> Any in
+//            let model = modelClass.init()
+            let modelString = NSStringFromClass(modelClass)
+            let cls = NSClassFromString(modelString) as? NSObject.Type
+            let model = cls!.init()
             let singleJsonModel = self.jsonToModel(model,json: singleJson)
             return singleJsonModel
         }
@@ -23,32 +35,38 @@ struct JsonModel {
     }
     
     func jsonToModel(model:AnyObject, json:AnyObject) -> AnyObject? {
-        let mirror = Mirror(reflecting: model)
-        let modelString = NSStringFromClass(model.classForCoder)
-        guard let cls = NSClassFromString(modelString) as? NSObject.Type else {
-            return nil
+        
+        var replaceObjectClass: [String: String]?
+        if model is JsonModelProtocol {
+            replaceObjectClass =  (model as! JsonModelProtocol).setupReplaceObjectClass()
         }
-        let obj = cls.init()
+        
+        let mirror = Mirror(reflecting: model)
+//        let modelString = NSStringFromClass(model.classForCoder)
+//        guard let cls = NSClassFromString(modelString) as? NSObject.Type else {
+//            return nil
+//        }
+//        
+//        let obj = cls.init()
+        
         mirror.children.map { (child) -> Void in
             let value:AnyObject? = json.objectForKey(child.label!)
-            let type = child.value.dynamicType
-            if type is Optional<AuthorModel>.Type {
-                
-            }
-            if type is Optional<String>.Type {
-                print(child)
-            }
             
-            if child.value.dynamicType is JsonModelProtocol {
-                if let childModel = NSClassFromString(modelString) as? NSObject.Type {
+            if replaceObjectClass!.keys.contains(child.label!) {
+                let type = replaceObjectClass![child.label!]!
+                if let childClass = NSClassFromString(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName")!.description + "." + type) as? NSObject.Type {
+                    let childModel = childClass.init()
+                    model.setValue(childModel, forKey: child.label!)
                     self.jsonToModel(childModel, json: value!)
                 }
             }else{
-                obj.setValue(value, forKey: child.label!)
+                model.setValue(value, forKey: child.label!)
             }
         }
-        return obj
+        return model
     }
+    
+    
     
     init(){
         
