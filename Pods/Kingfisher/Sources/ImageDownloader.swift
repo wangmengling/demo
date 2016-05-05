@@ -424,7 +424,6 @@ class ImageDownloaderSessionHandler: NSObject, NSURLSessionDataDelegate, Authent
             let options = downloader.fetchLoadForKey(imageURL)?.options ?? KingfisherEmptyOptionsInfo
             
             downloader.cleanForURL(imageURL)
-            
             for callbackPair in callbackPairs {
                 dispatch_async_safely_to_queue(options.callbackDispatchQueue, { () -> Void in
                     callbackPair.completionHander?(image: image, error: error, imageURL: imageURL, originalData: originalData)

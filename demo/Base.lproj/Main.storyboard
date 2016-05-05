@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Qc6-cT-r5I">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Qc6-cT-r5I">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -151,7 +151,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="kiG-vu-DBp">
-                            <rect key="frame" x="0.0" y="206" width="600" height="44"/>
+                            <rect key="frame" x="0.0" y="206" width="600" height="201"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IVW-Ld-U9a">
@@ -161,8 +161,19 @@
                                         <action selector="clickAction:" destination="SlO-Nd-VfF" eventType="touchUpInside" id="HIx-7F-wLy"/>
                                     </connections>
                                 </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oC7-tZ-bml">
+                                    <rect key="frame" x="180" y="8" width="240" height="128"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="240" id="1c5-96-vaq"/>
+                                        <constraint firstAttribute="height" constant="128" id="r5P-cf-UMs"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="oC7-tZ-bml" firstAttribute="top" secondItem="kiG-vu-DBp" secondAttribute="top" constant="8" id="Sac-dr-sS3"/>
+                                <constraint firstItem="oC7-tZ-bml" firstAttribute="centerX" secondItem="kiG-vu-DBp" secondAttribute="centerX" id="iOh-Um-fqq"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="NavigatorHiddenTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="NavigatorHiddenTableViewCell" id="IL7-zl-1ay" customClass="NavigatorHiddenTableViewCell" customModule="demo" customModuleProvider="target">
@@ -212,6 +223,9 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="Ac6-qp-cRQ">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="0XR-tp-P9B"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="oC7-tZ-bml" id="1oP-JY-OCC"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0lO-51-7Qk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

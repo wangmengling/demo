@@ -15,7 +15,7 @@ extension UIImageView {
             let image = UIImage().ml_image(originData!, scale: 1)
             self.image = image
             }) { (image, error, imageURL, originalData) in
-                
+            self.image = image
         }
     }
 }

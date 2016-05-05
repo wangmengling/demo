@@ -13,6 +13,7 @@ import Alamofire
 class NavigatorHiddenTableViewController: UITableViewController {
     var topicModelArray:Array<Any> = Array<Any>()
     
+    @IBOutlet weak var imageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,7 +30,16 @@ class NavigatorHiddenTableViewController: UITableViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 114
-        self.getCNodeOrgTopics()
+//        self.getCNodeOrgTopics()
+        
+        let url = NSURL(string: "http://gtb.baidu.com/HttpService/get?p=dHlwZT1pbWFnZS9qcGVnJm49dmlzJnQ9YWRpbWcmYz10YjppZyZyPTQ5NzI4NDUwNCwzNjU5MjAxODMy")
+        MLImageDowloader.defaultDownloader.downloaderImage(url!, progressBlock: { (receivedSize, totalSize, originData) in
+            let image = UIImage().ml_image(originData!, scale: 1)
+//            self.image = image
+            self.imageView.image = image
+        }) { (image, error, imageURL, originalData) in
+            self.imageView.image = image
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -153,8 +153,6 @@ class MLImageDownloaderSessionHandler: NSObject,NSURLSessionDataDelegate {
      This method is exposed since the compiler requests. Do not call it.
      */
     internal func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
-        print(task.countOfBytesExpectedToReceive)
-        print(task.countOfBytesReceived)
         self.callBackImage(task)
     }
     
@@ -163,10 +161,36 @@ class MLImageDownloaderSessionHandler: NSObject,NSURLSessionDataDelegate {
      This method is exposed since the compiler requests. Do not call it.
      */
     internal func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
-        
+//        print(session.configuration)
+        if challenge.protectionSpace.authenticationMethod.compare(NSURLAuthenticationMethodServerTrust).rawValue == 0 {
+            if challenge.protectionSpace.host.compare("HOST_NAME").rawValue == 0 {
+                completionHandler(.UseCredential, NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!))
+            }
+            
+        } else if challenge.protectionSpace.authenticationMethod.compare(NSURLAuthenticationMethodHTTPBasic).rawValue == 0 {
+            if challenge.previousFailureCount > 0 {
+                completionHandler(NSURLSessionAuthChallengeDisposition.CancelAuthenticationChallenge, nil)
+            } else {
+                let credential = NSURLCredential(user:"username", password:"password", persistence: .ForSession)
+                completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential,credential)
+            }
+        }
+
     }
     
     func callBackImage(task:NSURLSessionTask) {
 //        let image = UIImage().ml_image(task, scale: <#T##CGFloat#>)
+        guard let downloader = downloadHolder else {
+            return
+        }
+        
+        if let URL = task.originalRequest?.URL, fetchLoad = downloader.fetchLoadForKey(URL) {
+            
+            for callbackPair in fetchLoad.callbacks {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    callbackPair.completionHander?(image: UIImage().ml_image(fetchLoad.responseData, scale: 1), error: nil, imageURL: URL, originalData: fetchLoad.responseData)
+                })
+            }
+        }
     }
 }
