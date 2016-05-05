@@ -9,7 +9,7 @@
 import UIKit
 
 //下载进度
-public typealias DownloadProgressBlock = ((receivedSize: Int64, totalSize: Int64) -> ())
+public typealias DownloadProgressBlock = ((receivedSize: Int64, totalSize: Int64 , originData: NSData?) -> ())
 
 class MLImageDowloadManager {
     func reciveImageResoure() -> Void {

@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "demo/JsonModel.swift"
-            timestampString = "483519706.018519"
+            filePath = "demo/ImageView+MLImageDowload.swift"
+            timestampString = "484135043.446255"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "jsonToModel(_:json:)"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "set_MLImageWithURL(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,44 +57,60 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "demo/JsonModel.swift"
-            timestampString = "483519706.018519"
+            filePath = "demo/ImageView+MLImageDowload.swift"
+            timestampString = "484135103.677082"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "jsonToModel(_:json:)"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "set_MLImageWithURL(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "demo/MLImageDowloader.swift"
+            timestampString = "484135168.316389"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "URLSession(_:dataTask:didReceiveData:)"
             landmarkType = "5">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "demo.JsonModel.(jsonToModel (Swift.AnyObject, json : Swift.AnyObject) -&gt; Swift.Optional&lt;Swift.AnyObject&gt;).(closure #1)"
+                  symbolName = "demo.MLImageDownloaderSessionHandler.URLSession (__ObjC.NSURLSession, dataTask : __ObjC.NSURLSessionDataTask, didReceiveData : __ObjC.NSData) -&gt; ()"
                   moduleName = "demo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/github/demo/demo/JsonModel.swift"
-                  timestampString = "483519706.155154"
+                  urlString = "file:///Users/apple/Documents/github/demo/demo/MLImageDowloader.swift"
+                  timestampString = "484135168.320217"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "1981">
+                  startingLineNumber = "141"
+                  endingLineNumber = "141"
+                  offsetFromSymbolStart = "119">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "demo.JsonModel.(jsonToModel (Swift.AnyObject, json : Swift.AnyObject) -&gt; Swift.Optional&lt;Swift.AnyObject&gt;).(closure #1)"
+                  symbolName = "demo.MLImageDownloaderSessionHandler.URLSession (__ObjC.NSURLSession, dataTask : __ObjC.NSURLSessionDataTask, didReceiveData : __ObjC.NSData) -&gt; ()"
                   moduleName = "demo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/github/demo/demo/JsonModel.swift"
-                  timestampString = "483519706.155297"
+                  urlString = "file:///Users/apple/Documents/github/demo/demo/MLImageDowloader.swift"
+                  timestampString = "484135168.320464"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "2279">
+                  startingLineNumber = "141"
+                  endingLineNumber = "141"
+                  offsetFromSymbolStart = "322">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -105,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "demo/JsonModel.swift"
-            timestampString = "483519706.018519"
+            filePath = "demo/MLImageDowloader.swift"
+            timestampString = "484135177.548155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "jsonToModel(_:json:)"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "URLSession(_:dataTask:didReceiveData:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,13 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "demo/JsonModel.swift"
-            timestampString = "483519706.018519"
+            filePath = "demo/MLImageDowloader.swift"
+            timestampString = "484135182.355556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "jsonToModel(_:json:)"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "URLSession(_:dataTask:didReceiveData:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,13 +153,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "demo/JsonModel.swift"
-            timestampString = "483519706.018519"
+            filePath = "demo/MLImageDowloader.swift"
+            timestampString = "484135330.632681"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "jsonToModel(_:json:)"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "URLSession(_:dataTask:didReceiveResponse:completionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

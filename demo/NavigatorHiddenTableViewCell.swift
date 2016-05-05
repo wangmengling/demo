@@ -29,7 +29,8 @@ class NavigatorHiddenTableViewCell: UITableViewCell {
         self.titleLabel.text = self.topicsModel?.title
         if ((self.topicsModel?.author?.avatar_url) != nil) {
             let url = NSURL(string: (self.topicsModel?.author?.avatar_url!)!)!
-             self.avatarImageView.kf_setImageWithURL(url)
+//             self.avatarImageView.kf_setImageWithURL(url)
+            self.avatarImageView.set_MLImageWithURL(url)
         }
         
        

@@ -8,15 +8,26 @@
 
 import UIKit
 
-/// Progress update block of downloader.
+/// Progress update block of downloader. 下载进度
 public typealias MLImageDownloaderProgressBlock = DownloadProgressBlock
 
 /// Completion block of downloader.
 public typealias MLImageDownloaderCompletionHandler = ((image: UIImage?, error: NSError?, imageURL: NSURL?, originalData: NSData?) -> ())
 
+//回调
+typealias CallbackPair = (progressBlock: MLImageDownloaderProgressBlock?, completionHander: MLImageDownloaderCompletionHandler?)
+
 
 private let defaultDownloaderName = "default"
 private let instance = MLImageDowloader(name: defaultDownloaderName)
+
+/// 回调
+class MLImageCallbacks  {
+    var callbacks = [CallbackPair]()
+    var responseData = NSMutableData()
+}
+
+
 
 class MLImageDowloader {
     
@@ -29,6 +40,9 @@ class MLImageDowloader {
     var session: NSURLSession?
     var sessionDataTask: NSURLSessionDataTask?
     var sessionHandler:MLImageDownloaderSessionHandler?
+    
+    var fetchLoads = [NSURL:MLImageCallbacks]() //所有的加载
+    
     
     
     
@@ -60,6 +74,7 @@ class MLImageDowloader {
 // MARK: - dowloader
 extension MLImageDowloader {
     func downloaderImage(URL: NSURL,
+                         progressBlock: MLImageDownloaderProgressBlock,
                          completionHandler:MLImageDownloaderCompletionHandler) -> Void
     {
         /// 构建 request
@@ -71,13 +86,39 @@ extension MLImageDowloader {
         sessionDataTask?.priority = NSURLSessionTaskPriorityDefault
         self.sessionHandler?.downloadHolder = self
         sessionDataTask?.resume()
+        
+        //注册回调
+        registerProgressBlock(progressBlock, completionHandler: completionHandler, URL: URL)
+    }
+}
+
+// MARK: - register callback
+extension MLImageDowloader {
+    internal func registerProgressBlock(progressBlock:MLImageDownloaderProgressBlock,completionHandler:MLImageDownloaderCompletionHandler, URL:NSURL){
+        
+        //本次加载数据的回调
+        let callBacks = self.fetchLoads[URL] ?? MLImageCallbacks()
+        let callbackPair = CallbackPair(progressBlock: progressBlock, completionHander: completionHandler)
+        callBacks.callbacks.append(callbackPair)
+        
+        //注册回调
+        self.fetchLoads[URL] = callBacks
+        
+    }
+    
+    func fetchLoadForKey(URL: NSURL) -> MLImageCallbacks? {
+        var fetchLoad: MLImageCallbacks?
+//        dispatch_sync(barrierQueue, { () -> Void in
+            fetchLoad = self.fetchLoads[URL]
+//        })
+        return fetchLoad
     }
 }
 
 
 
 
-/// NSURLSessionDataDelegate 实现
+// MARK: - NSURLSessionDataDelegate 实现
 class MLImageDownloaderSessionHandler: NSObject,NSURLSessionDataDelegate {
     var downloadHolder: MLImageDowloader?
     /**
@@ -93,6 +134,19 @@ class MLImageDownloaderSessionHandler: NSObject,NSURLSessionDataDelegate {
      */
     internal func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
         
+        guard let downloader = downloadHolder else {
+            return
+        }
+        
+        if let URL = dataTask.originalRequest?.URL, fetchLoad = downloader.fetchLoadForKey(URL) {
+            fetchLoad.responseData.appendData(data)
+            
+            for callbackPair in fetchLoad.callbacks {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    callbackPair.progressBlock?(receivedSize: Int64(fetchLoad.responseData.length), totalSize: dataTask.response!.expectedContentLength, originData: data)
+                })
+            }
+        }
     }
     
     /**

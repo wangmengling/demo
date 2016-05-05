@@ -128,11 +128,14 @@ extension NavigatorHiddenTableViewController {
 //            self.jsonToModelArray(TopicsModel.self, json: data.objectForKey("data")! as! Array<AnyObject>)
             self.tableView.reloadData()
         }
+        
     }
     
     @IBAction func clickAction(sender: AnyObject) {
     }
     
 }
+
+
 
 

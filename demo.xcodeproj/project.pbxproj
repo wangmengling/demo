@@ -72,6 +72,7 @@
 		181477A81CCDBFDA00481D54 /* TopicsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsModel.swift; sourceTree = "<group>"; };
 		182A0ADD1CC9F35700A49759 /* NetWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWork.swift; sourceTree = "<group>"; };
 		184428E91CD1A13A005F6DE1 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		18B0383C1CD2FD910097178D /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		18DC9A021CCF4E6B000D4C6B /* NavigatorHiddenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorHiddenTableViewCell.swift; sourceTree = "<group>"; };
 		18DC9A051CD0685D000D4C6B /* ImageView+MLImageDowload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageView+MLImageDowload.swift"; sourceTree = "<group>"; };
 		18DC9A071CD068FC000D4C6B /* MLImageDowloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLImageDowloadManager.swift; sourceTree = "<group>"; };
@@ -139,6 +140,7 @@
 				16198EEA1CC50A010078919A /* NewViewController.swift */,
 				18092AD31CC625EC00E74EBD /* SpringViewController.swift */,
 				18092AD51CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift */,
+				18B0383C1CD2FD910097178D /* MyPlayground.playground */,
 				18DC9A021CCF4E6B000D4C6B /* NavigatorHiddenTableViewCell.swift */,
 				16CBE3881CC5135C00A3699F /* Pop.swift */,
 				182A0ADD1CC9F35700A49759 /* NetWork.swift */,
