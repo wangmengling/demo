@@ -31,9 +31,7 @@ class NavigatorHiddenTableViewCell: UITableViewCell {
             let url = NSURL(string: (self.topicsModel?.author?.avatar_url!)!)!
 //            let url = NSURL(string: "https://avatars.githubusercontent.com/u/1011681?v=3&s=120")
              self.avatarImageView.kf_setImageWithURL(url)
-//            self.avatarImageView.set_MLImageWithURL(url!)
+//            self.avatarImageView.set_MLImageWithURL(url)
         }
-        
-       
     }
 }
