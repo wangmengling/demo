@@ -30,7 +30,7 @@ class NavigatorHiddenTableViewController: UITableViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 114
-//        self.getCNodeOrgTopics()
+        self.getCNodeOrgTopics()
         
         let url = NSURL(string: "http://gtb.baidu.com/HttpService/get?p=dHlwZT1pbWFnZS9qcGVnJm49dmlzJnQ9YWRpbWcmYz10YjppZyZyPTQ5NzI4NDUwNCwzNjU5MjAxODMy")
         MLImageDowloader.defaultDownloader.downloaderImage(url!, progressBlock: { (receivedSize, totalSize, originData) in
