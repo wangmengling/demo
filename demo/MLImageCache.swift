@@ -38,12 +38,14 @@ class MLImageCache {
 
 extension MLImageCache {
     func storageImage(image:UIImage, imageData:NSData, key:String) -> Void {
-        self.memoryCache.setObject(imageData, forKey: key)
+        self.memoryCache.setObject(image, forKey: key)
+        print(self.memoryCache.objectForKey(key))
     }
 }
 
 extension MLImageCache {
     func receiveImageForKey(key:String, completionHandler: ((UIImage?, CacheType!) -> ())?) -> Void {
-        self.memoryCache.objectForKey(key)
+        let image = self.memoryCache.objectForKey(key) as? UIImage
+        completionHandler!(image , .Memory)
     }
 }
