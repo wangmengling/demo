@@ -131,7 +131,7 @@ extension MLImageCache {
     }
     
     /**
-     获取磁盘缓存文件
+     receive file cache image
      
      - parameter key:               url String
      - parameter completionHandler: completionHandler description
