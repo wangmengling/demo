@@ -12,7 +12,7 @@ import UIKit
 public typealias MLImageDownloaderProgressBlock = DownloadProgressBlock
 
 /// Completion block of downloader.
-public typealias MLImageDownloaderCompletionHandler = ((image: UIImage?, error: NSError?, imageURL: NSURL?, originalData: NSData?) -> ())
+public typealias MLImageDownloaderCompletionHandler = ((image: UIImage?, error: NSError?, cacheType: CacheType?,  imageURL: NSURL?, originalData: NSData?) -> ())
 
 //回调
 typealias CallbackPair = (progressBlock: MLImageDownloaderProgressBlock?, completionHander: MLImageDownloaderCompletionHandler?)
@@ -181,7 +181,7 @@ class MLImageDownloaderSessionHandler: NSObject,NSURLSessionDataDelegate {
         if let URL = task.originalRequest?.URL, fetchLoad = downloader.fetchLoadForKey(URL) {
             for callbackPair in fetchLoad.callbacks {
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    callbackPair.completionHander?(image: UIImage().ml_image(fetchLoad.responseData, scale: 1), error: nil, imageURL: URL, originalData: fetchLoad.responseData)
+                    callbackPair.completionHander?(image: UIImage().ml_image(fetchLoad.responseData, scale: 1), error: nil, cacheType:nil, imageURL: URL, originalData: fetchLoad.responseData)
                 })
             }
         }

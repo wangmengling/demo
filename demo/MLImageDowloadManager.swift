@@ -15,6 +15,7 @@ private let instance = MLImageDowloadManager()
 
 class MLImageDowloadManager {
     
+<<<<<<< HEAD
     var downloader: MLImageDowloader!
     var imageCache:MLImageCache!
     
@@ -34,6 +35,46 @@ extension MLImageDowloadManager {
 //        imageCache.reciveImageResoure()
         guard let image = imageCache.receiveImageForKey(URL.absoluteString, completionHandler: nil) else {
             downloader.downloaderImage(URL, progressBlock: progressBlock, completionHandler: completionHandler)
+=======
+    var imageDowloader = MLImageDowloader.defaultDownloader
+    
+    var imageCache = MLImageCache.sharedInstance
+    
+    class var instanceManager: MLImageDowloadManager {
+        return instance
+    }
+    
+    func reciveImageResoure(URL: NSURL,
+                            progressBlock: DownloadProgressBlock,
+                            completionHandler:MLImageDownloaderCompletionHandler) -> Void{
+        self.reciveImageFromCache(URL, progressBlock: progressBlock, completionHandler: completionHandler)
+    }
+}
+
+extension MLImageDowloadManager {
+    
+    func reciveImageFromCache(URL:NSURL,
+                              progressBlock: DownloadProgressBlock,
+                              completionHandler:MLImageDownloaderCompletionHandler) -> Void {
+        imageCache.receiveImageForKey(URL.absoluteString) { (image, cacheType) in
+            if image != nil {
+                completionHandler(image: image, error: nil, cacheType: cacheType, imageURL: URL,originalData: nil)
+            } else {
+//                self.imageDowloader.downloaderImage(URL, progressBlock: progressBlock, completionHandler: completionHandler)
+                self.reciveImageFromWithUrlToCache(URL, progressBlock: progressBlock, completionHandler: completionHandler)
+            }
+        }
+    }
+    
+    
+    func reciveImageFromWithUrlToCache(URL: NSURL,
+                                       progressBlock: DownloadProgressBlock,
+                                       completionHandler:MLImageDownloaderCompletionHandler) -> Void {
+//        self.imageDowloader.downloaderImage(URL, progressBlock: progressBlock, completionHandler: completionHandler)
+        self.imageDowloader.downloaderImage(URL, progressBlock: progressBlock) { (image, error, cacheType, imageURL, originalData) in
+            self.imageCache.storageImage(image!, imageData: originalData!, key: URL.absoluteString)
+            completionHandler(image: image, error: error, cacheType: cacheType, imageURL: URL,originalData: originalData)
+>>>>>>> origin/master
         }
     }
 }

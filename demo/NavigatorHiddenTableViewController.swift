@@ -37,15 +37,28 @@ class NavigatorHiddenTableViewController: UITableViewController {
 //            let image = UIImage().ml_image(originData!, scale: 1)
 ////            self.image = image
 //            self.imageView.image = image
+<<<<<<< HEAD
 //        }) { (image, error, imageURL, originalData) in
 //            self.imageView.image = image
 //        }
         imageView.set_MLImageWithURL(url!)
+=======
+//        }) { (image, error, cacheType,imageURL, originalData) in
+//            self.imageView.image = image
+//        }
+        self.imageView.set_MLImageWithURL(url!)
+>>>>>>> origin/master
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        let url = NSURL(string: "http://gtb.baidu.com/HttpService/get?p=dHlwZT1pbWFnZS9qcGVnJm49dmlzJnQ9YWRpbWcmYz10YjppZyZyPTQ5NzI4NDUwNCwzNjU5MjAxODMy")
+        self.imageView.set_MLImageWithURL(url!)
     }
 
     // MARK: - Table view data source
@@ -65,7 +78,7 @@ class NavigatorHiddenTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("NavigatorHiddenTableViewCell", forIndexPath: indexPath) as! NavigatorHiddenTableViewCell
 
         // Configure the cell...
-        print(self.topicModelArray[indexPath.row] as? TopicsModel)
+//        print(self.topicModelArray[indexPath.row] as? TopicsModel)
         cell.topicsModel = self.topicModelArray[indexPath.row] as? TopicsModel
         return cell
     }
