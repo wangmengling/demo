@@ -18,6 +18,7 @@
 		16BFD6871CD257AF00EB70F5 /* AuthorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BFD6861CD257AF00EB70F5 /* AuthorModel.swift */; };
 		16C503AC1CCB63C900D074ED /* StoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C503AB1CCB63C900D074ED /* StoreModel.swift */; };
 		16CBE3891CC5135C00A3699F /* Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CBE3881CC5135C00A3699F /* Pop.swift */; };
+		16EBABC91CDEE2BD00945D7F /* MLImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EBABC81CDEE2BD00945D7F /* MLImageCache.swift */; };
 		18092AD41CC625EC00E74EBD /* SpringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18092AD31CC625EC00E74EBD /* SpringViewController.swift */; };
 		18092AD61CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18092AD51CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift */; };
 		181477A91CCDBFDA00481D54 /* TopicsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181477A81CCDBFDA00481D54 /* TopicsModel.swift */; };
@@ -68,6 +69,7 @@
 		16BFD6861CD257AF00EB70F5 /* AuthorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorModel.swift; sourceTree = "<group>"; };
 		16C503AB1CCB63C900D074ED /* StoreModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreModel.swift; sourceTree = "<group>"; };
 		16CBE3881CC5135C00A3699F /* Pop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pop.swift; sourceTree = "<group>"; };
+		16EBABC81CDEE2BD00945D7F /* MLImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLImageCache.swift; sourceTree = "<group>"; };
 		18092AD31CC625EC00E74EBD /* SpringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringViewController.swift; sourceTree = "<group>"; };
 		18092AD51CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorHiddenTableViewController.swift; sourceTree = "<group>"; };
 		181477A81CCDBFDA00481D54 /* TopicsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsModel.swift; sourceTree = "<group>"; };
