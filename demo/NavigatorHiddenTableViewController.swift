@@ -30,24 +30,10 @@ class NavigatorHiddenTableViewController: UITableViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 114
-        self.getCNodeOrgTopics()
+//        self.getCNodeOrgTopics()
         
-        let url = NSURL(string: "http://gtb.baidu.com/HttpService/get?p=dHlwZT1pbWFnZS9qcGVnJm49dmlzJnQ9YWRpbWcmYz10YjppZyZyPTQ5NzI4NDUwNCwzNjU5MjAxODMy")
-//        MLImageDowloader.defaultDownloader.downloaderImage(url!, progressBlock: { (receivedSize, totalSize, originData) in
-//            let image = UIImage().ml_image(originData!, scale: 1)
-////            self.image = image
-//            self.imageView.image = image
-<<<<<<< HEAD
-//        }) { (image, error, imageURL, originalData) in
-//            self.imageView.image = image
-//        }
-        imageView.set_MLImageWithURL(url!)
-=======
-//        }) { (image, error, cacheType,imageURL, originalData) in
-//            self.imageView.image = image
-//        }
-        self.imageView.set_MLImageWithURL(url!)
->>>>>>> origin/master
+//        let url = NSURL(string: "http://gtb.baidu.com/HttpService/get?p=dHlwZT1pbWFnZS9qcGVnJm49dmlzJnQ9YWRpbWcmYz10YjppZyZyPTQ5NzI4NDUwNCwzNjU5MjAxODMy")
+//        self.imageView.set_MLImageWithURL(url!)
     }
 
     override func didReceiveMemoryWarning() {

@@ -159,6 +159,7 @@
                                     <state key="normal" title="Button"/>
                                     <connections>
                                         <action selector="clickAction:" destination="SlO-Nd-VfF" eventType="touchUpInside" id="HIx-7F-wLy"/>
+                                        <segue destination="Fdt-Nu-aP9" kind="push" id="nc0-FP-cUM"/>
                                     </connections>
                                 </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oC7-tZ-bml">
@@ -235,6 +236,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0lO-51-7Qk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="329" y="2663"/>
+        </scene>
+        <!--Second View Controller-->
+        <scene sceneID="Cy8-2o-jrD">
+            <objects>
+                <viewController storyboardIdentifier="SecondViewController" id="Fdt-Nu-aP9" customClass="SecondViewController" customModule="demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VAc-mp-ghA"/>
+                        <viewControllerLayoutGuide type="bottom" id="RKD-Ht-Hu1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aeQ-iV-nTh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uN7-ov-pxN">
+                                <rect key="frame" x="51" y="63" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="2Hu-nu-Z7N"/>
+                    <connections>
+                        <outlet property="imageView" destination="uN7-ov-pxN" id="x0v-o6-iz0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fqF-z4-8zg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1012" y="2663"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ffc-Kq-V2g">

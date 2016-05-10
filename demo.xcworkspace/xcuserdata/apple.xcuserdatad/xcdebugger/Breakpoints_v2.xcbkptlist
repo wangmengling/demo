@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "demo/MLImageCache.swift"
-            timestampString = "484552914.318313"
+            timestampString = "484563720.824455"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "storageImage(_:imageData:key:)"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "storageImage(_:originalData:key:isFileCache:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "demo/MLImageCache.swift"
-            timestampString = "484552915.67835"
+            filePath = "demo/MLImageDowloadManager.swift"
+            timestampString = "484563788.502692"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
             endingLineNumber = "48"
-            landmarkName = "receiveImageForKey(_:completionHandler:)"
+            landmarkName = "reciveImageFromCache(_:progressBlock:completionHandler:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "demo/ImageView+MLImageDowload.swift"
+            timestampString = "484563875.676289"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "set_MLImageWithURL(_:placeHolder:progressBlock:completionHandler:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

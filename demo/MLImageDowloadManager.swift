@@ -22,35 +22,49 @@ class MLImageDowloadManager {
         return instance
     }
     
-    func reciveImageResoure(URL: NSURL,
-                            progressBlock: DownloadProgressBlock,
-                            completionHandler:MLImageDownloaderCompletionHandler) -> Void{
-        self.reciveImageFromCache(URL, progressBlock: progressBlock, completionHandler: completionHandler)
-    }
+    
 }
 
+// MARK: - 获取image
 extension MLImageDowloadManager {
     
+    func reciveImageResoure(URL: NSURL,
+                            progressBlock: DownloadProgressBlock? = nil,
+                            completionHandler:MLImageDownloaderCompletionHandler? = nil) -> Void{
+        self.reciveImageFromCache(URL, progressBlock: progressBlock, completionHandler: completionHandler)
+    }
+    
+    /**
+     从内存中获取
+     
+     - parameter URL:               <#URL description#>
+     - parameter progressBlock:     <#progressBlock description#>
+     - parameter completionHandler: <#completionHandler description#>
+     */
     func reciveImageFromCache(URL:NSURL,
-                              progressBlock: DownloadProgressBlock,
-                              completionHandler:MLImageDownloaderCompletionHandler) -> Void {
+                              progressBlock: DownloadProgressBlock? = nil,
+                              completionHandler:MLImageDownloaderCompletionHandler? = nil) -> Void {
         imageCache.receiveImageForKey(URL.absoluteString) { (image, cacheType) in
             if image != nil {
-                completionHandler(image: image, error: nil, cacheType: cacheType, imageURL: URL,originalData: nil)
+                completionHandler!(image: image, error: nil, cacheType: cacheType, imageURL: URL,originalData: nil)
             } else {
-//                self.imageDowloader.downloaderImage(URL, progressBlock: progressBlock, completionHandler: completionHandler)
-                self.reciveImageFromWithUrlToCache(URL, progressBlock: progressBlock, completionHandler: completionHandler)
+                self.reciveImageFromWithUrlToCache(URL, progressBlock: progressBlock!, completionHandler: completionHandler!)
             }
         }
     }
     
-    
+    /**
+     从网络获取
+     
+     - parameter URL:               <#URL description#>
+     - parameter progressBlock:     <#progressBlock description#>
+     - parameter completionHandler: <#completionHandler description#>
+     */
     func reciveImageFromWithUrlToCache(URL: NSURL,
                                        progressBlock: DownloadProgressBlock,
                                        completionHandler:MLImageDownloaderCompletionHandler) -> Void {
-//        self.imageDowloader.downloaderImage(URL, progressBlock: progressBlock, completionHandler: completionHandler)
         self.imageDowloader.downloaderImage(URL, progressBlock: progressBlock) { (image, error, cacheType, imageURL, originalData) in
-            self.imageCache.storageImage(image!, imageData: originalData!, key: URL.absoluteString)
+            self.imageCache.storageImage(image!, originalData: originalData!, key: URL.absoluteString,isFileCache: true)
             completionHandler(image: image, error: error, cacheType: cacheType, imageURL: URL,originalData: originalData)
         }
     }
