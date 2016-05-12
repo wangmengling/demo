@@ -14,9 +14,11 @@ extension UIImageView {
                             placeHolder:UIImage? = nil,
                             progressBlock:MLImageDownloaderProgressBlock? = nil,
                             completionHandler:MLImageDownloaderCompletionHandler? = nil) -> Void {
+        self.image = UIImage()
         if (placeHolder != nil) {
             self.image = placeHolder
         }
+        
         MLImageDowloadManager.instanceManager.reciveImageResoure(URL, progressBlock: { (receivedSize, totalSize, originData) in
                 progressBlock?(receivedSize: receivedSize, totalSize: totalSize , originData: originData)
             }) { (image, error, cacheType, imageURL, originalData) in

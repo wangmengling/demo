@@ -30,7 +30,7 @@ class NavigatorHiddenTableViewController: UITableViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 114
-//        self.getCNodeOrgTopics()
+        self.getCNodeOrgTopics()
         
 //        let url = NSURL(string: "http://gtb.baidu.com/HttpService/get?p=dHlwZT1pbWFnZS9qcGVnJm49dmlzJnQ9YWRpbWcmYz10YjppZyZyPTQ5NzI4NDUwNCwzNjU5MjAxODMy")
 //        self.imageView.set_MLImageWithURL(url!)
@@ -43,7 +43,7 @@ class NavigatorHiddenTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let url = NSURL(string: "http://gtb.baidu.com/HttpService/get?p=dHlwZT1pbWFnZS9qcGVnJm49dmlzJnQ9YWRpbWcmYz10YjppZyZyPTQ5NzI4NDUwNCwzNjU5MjAxODMy")
+        let url = NSURL(string: "//gravatar.com/avatar/75667f52de5dbe27f5d037d7121bc178?size=48")
         self.imageView.set_MLImageWithURL(url!)
     }
 

@@ -120,7 +120,6 @@ public class KingfisherManager {
     {
         let task = RetrieveImageTask()
 
-        print(optionsInfo)
         if let optionsInfo = optionsInfo where optionsInfo.forceRefresh {
             downloadAndCacheImageWithURL(resource.downloadURL,
                 forKey: resource.cacheKey,

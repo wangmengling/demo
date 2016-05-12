@@ -64,7 +64,10 @@ extension MLImageDowloadManager {
                                        progressBlock: DownloadProgressBlock,
                                        completionHandler:MLImageDownloaderCompletionHandler) -> Void {
         self.imageDowloader.downloaderImage(URL, progressBlock: progressBlock) { (image, error, cacheType, imageURL, originalData) in
-            self.imageCache.storageImage(image!, originalData: originalData!, key: URL.absoluteString,isFileCache: true)
+            if (image != nil) {
+                self.imageCache.storageImage(image!, originalData: originalData!, key: URL.absoluteString,isFileCache: true)
+            }
+            
             completionHandler(image: image, error: error, cacheType: cacheType, imageURL: URL,originalData: originalData)
         }
     }

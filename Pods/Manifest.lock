@@ -1,19 +1,42 @@
 PODS:
-  - Alamofire (3.3.1)
+  - Alamofire (3.4.0)
+  - EasyPeasy (0.2.3)
   - Genome (2.0.4):
     - PureJsonSerializer (~> 1.0.0)
-  - Kingfisher (2.3.1)
+  - Kingfisher (2.4.1)
   - PureJsonSerializer (1.0.2)
+  - Realm (0.102.0):
+    - Realm/Headers (= 0.102.0)
+  - Realm/Headers (0.102.0)
+  - RealmSwift (0.102.0):
+    - Realm (= 0.102.0)
+  - ReSwift (1.0.0)
+  - RxCocoa (2.4):
+    - RxSwift (~> 2.4)
+  - RxSwift (2.4)
 
 DEPENDENCIES:
   - Alamofire
+  - EasyPeasy
   - Genome (~> 2.0.0)
   - Kingfisher (~> 2.3)
+  - RealmSwift
+  - ReSwift
+  - RxCocoa (~> 2.0)
+  - RxSwift (~> 2.0)
 
 SPEC CHECKSUMS:
-  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
+  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  EasyPeasy: 8ffc6502c888220d80cbecb53ca188e772d4ea2a
   Genome: ee22f71d87eefac0f622f77e75d1fef7f7fa12e7
-  Kingfisher: 6d3fbada4829cbc7b89e883e8218c28afeb64e42
+  Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
   PureJsonSerializer: 81d6bc0e21ed4b837193279aa3d29981f75f9057
+  Realm: 5d219f9037e3ec2019c599b8227bfc95433cb10e
+  RealmSwift: e6f436f9fea1c57b9ad6d1c46d57562c845f3c4c
+  ReSwift: 2097946852b045bcc04182b63cdab9ab7fc35812
+  RxCocoa: 7d6cd877de99f5640306b3d6cf87f580c1d91b61
+  RxSwift: 67b9ef4e8b34fb394e200e754c6a09cc16559f94
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 44b40a7c310b3694a341769458b45e9db8d40a99
+
+COCOAPODS: 1.0.0
