@@ -7,7 +7,18 @@
 //
 
 import Foundation
-import ReSwift
 
-struct CounterActionIncrease: Action {}
-struct CounterActionDecrease: Action {}
+enum ActionTypes:String{
+    case LoginUserUpdateType = "LoginUserUpdateType"
+    case GetCustomerAdvertisements = "getCustomerAdvertisements"
+    case GetCustomerAdvertisementsModel = "GetCustomerAdvertisementsModel"
+    case customerLogin = "customerLogin" //登录
+}
+
+
+private let instance = Actions()
+class Actions {
+    class var shareInstance: Actions {
+        return instance
+    }
+}

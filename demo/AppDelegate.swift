@@ -9,8 +9,6 @@
 import UIKit
 import ReSwift
 
-var mainStore = Store(reducer: CounterReducer(), state: AppState())
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
