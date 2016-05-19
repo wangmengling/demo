@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EasyPeasy
 
 let timeInterval:NSTimeInterval = 2
 
@@ -63,7 +64,13 @@ class CarouselView: UIView, UIScrollViewDelegate{
         self.addSubview(contentScrollView)
         
         
-        pageControl = UIPageControl(frame: frame)
+        pageControl = UIPageControl()
+        pageControl <-  [
+            Right(10),
+            Width(100),
+            Height(30),
+            Bottom(10)
+        ]
         self.addSubview(pageControl)
         
         
