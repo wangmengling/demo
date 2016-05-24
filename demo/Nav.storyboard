@@ -40,10 +40,10 @@
             </objects>
             <point key="canvasLocation" x="-399" y="1222"/>
         </scene>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="G1j-uz-pvo">
             <objects>
-                <viewController id="pLV-9H-HzA" sceneMemberID="viewController">
+                <viewController restorationIdentifier="HomeViewController" storyboardIdentifier="HomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="pLV-9H-HzA" customClass="HomeViewController" customModule="demo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pUM-cN-hQ0"/>
                         <viewControllerLayoutGuide type="bottom" id="Uqy-pI-lsQ"/>
@@ -83,6 +83,9 @@
                     <navigationItem key="navigationItem" id="sgk-0B-25B"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1300"/>
+                    <connections>
+                        <outlet property="backScrollView" destination="wCz-5K-Bvm" id="FUY-tg-cnb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAV-cG-q7Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

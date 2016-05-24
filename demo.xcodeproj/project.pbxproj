@@ -23,6 +23,7 @@
 		16BFD6871CD257AF00EB70F5 /* AuthorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BFD6861CD257AF00EB70F5 /* AuthorModel.swift */; };
 		16C503AC1CCB63C900D074ED /* StoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16C503AB1CCB63C900D074ED /* StoreModel.swift */; };
 		16CBE3891CC5135C00A3699F /* Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CBE3881CC5135C00A3699F /* Pop.swift */; };
+		16CF416E1CF0091E005E33D0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CF416D1CF0091E005E33D0 /* HomeViewController.swift */; };
 		18092AD41CC625EC00E74EBD /* SpringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18092AD31CC625EC00E74EBD /* SpringViewController.swift */; };
 		18092AD61CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18092AD51CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift */; };
 		181477A91CCDBFDA00481D54 /* TopicsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181477A81CCDBFDA00481D54 /* TopicsModel.swift */; };
@@ -83,6 +84,7 @@
 		16BFD6861CD257AF00EB70F5 /* AuthorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorModel.swift; sourceTree = "<group>"; };
 		16C503AB1CCB63C900D074ED /* StoreModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreModel.swift; sourceTree = "<group>"; };
 		16CBE3881CC5135C00A3699F /* Pop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pop.swift; sourceTree = "<group>"; };
+		16CF416D1CF0091E005E33D0 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		18092AD31CC625EC00E74EBD /* SpringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringViewController.swift; sourceTree = "<group>"; };
 		18092AD51CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorHiddenTableViewController.swift; sourceTree = "<group>"; };
 		181477A81CCDBFDA00481D54 /* TopicsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsModel.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				18FD05A61CE1B5AB0041837E /* SecondViewController.swift */,
 				18DC9A021CCF4E6B000D4C6B /* NavigatorHiddenTableViewCell.swift */,
 				18E9125C1CE5C7DC00360D54 /* CounterViewController.swift */,
+				16CF416D1CF0091E005E33D0 /* HomeViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				18FD05A91CE1D9920041837E /* String+MD5.swift in Sources */,
 				18DC9A061CD0685D000D4C6B /* ImageView+MLImageDowload.swift in Sources */,
 				18092AD41CC625EC00E74EBD /* SpringViewController.swift in Sources */,
+				16CF416E1CF0091E005E33D0 /* HomeViewController.swift in Sources */,
 				16AF032D1CE889CC00452DD1 /* AppDispatcher.swift in Sources */,
 				181477A91CCDBFDA00481D54 /* TopicsModel.swift in Sources */,
 				18FC68A21CCA2619005C512D /* JsonModel.swift in Sources */,
