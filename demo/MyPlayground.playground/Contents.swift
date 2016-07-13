@@ -64,3 +64,23 @@ extension UIViewController {
         static var DescriptiveName = "nsh_DescriptiveName"
     }
 }
+
+var o1:Int? = 2
+
+var o1m = o1.map({$0 * 2})
+
+var o2m = o1.map { (value) -> String in
+    String(value * 2)
+    }.map({$0+"asdf"})
+
+let ao1:[Int?] = [1,nil,3,4,5,6]
+
+var ao1m = ao1.map({$0! * 2})
+
+var a1ms = ao1.map({ (value) -> String in
+    String(value! * 2)
+}).map { (stringValue) -> Int? in
+    Int(stringValue)
+}
+
+CFRunLoopSource

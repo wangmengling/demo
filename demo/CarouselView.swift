@@ -149,8 +149,6 @@ extension CarouselView {
         self.setScrollViewOfImage()
         timer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: #selector(CarouselView.carouseAction), userInfo: nil, repeats: true)
         timer.fire()
-        
-
     }
 }
 

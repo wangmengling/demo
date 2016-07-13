@@ -8,12 +8,15 @@
 
 import UIKit
 import Alamofire
+import ObjectMapper
+import RxSwift
 
 
 class NavigatorHiddenTableViewController: UITableViewController {
-    var topicModelArray:Array<Any> = Array<Any>()
+    var topicModelArray:Array<TopicModel> = Array<TopicModel>()
     
     @IBOutlet weak var imageView: UIImageView!
+    let d = Variable(TopicssModel())
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -133,15 +136,18 @@ extension NavigatorHiddenTableViewController {
 //            print(data)
 //            self.jsonToModelArray(StoreModel(), json: data["data"])
             
-            self.topicModelArray = JsonModel().jsonToModelArray(TopicsModel.self, json: data.objectForKey("data")! as! Array<AnyObject>)
+//            self.topicModelArray = JsonModel().jsonToModelArray(TopicsModel.self, json: data.objectForKey("data")! as! Array<AnyObject>)
 //            self.topicModelArray = array as! Array<TopicsModel>
 //            self.jsonToModelArray(TopicsModel.self, json: data.objectForKey("data")! as! Array<AnyObject>)
+//            self.topicModelArray = Mapper<TopicModel>().mapArray(data.objectForKey("data"))!
+            let datas = data.objectForKey("data")
+            let d = DataConversion(TopicModel()).mapArray(data)
             self.tableView.reloadData()
         }
-        
     }
     
     @IBAction func clickAction(sender: AnyObject) {
+        self.getCNodeOrgTopics()
     }
     
 }
