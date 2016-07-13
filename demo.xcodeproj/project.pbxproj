@@ -31,6 +31,9 @@
 		182A0ADE1CC9F35700A49759 /* NetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182A0ADD1CC9F35700A49759 /* NetWork.swift */; };
 		1841E6FF1D2F82F500552CD4 /* InfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841E6FE1D2F82F500552CD4 /* InfiniteScrollView.swift */; };
 		184428EA1CD1A13A005F6DE1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184428E91CD1A13A005F6DE1 /* Image.swift */; };
+		187468871D364DB000BB22AB /* DataConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187468851D364DB000BB22AB /* DataConversion.swift */; };
+		187468881D364DB000BB22AB /* DataMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187468861D364DB000BB22AB /* DataMap.swift */; };
+		1874688B1D364DCF00BB22AB /* ViewTapBlockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187468891D364DCF00BB22AB /* ViewTapBlockProtocol.swift */; };
 		18DC9A031CCF4E6B000D4C6B /* NavigatorHiddenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC9A021CCF4E6B000D4C6B /* NavigatorHiddenTableViewCell.swift */; };
 		18DC9A061CD0685D000D4C6B /* ImageView+MLImageDowload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC9A051CD0685D000D4C6B /* ImageView+MLImageDowload.swift */; };
 		18DC9A081CD068FC000D4C6B /* MLImageDowloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC9A071CD068FC000D4C6B /* MLImageDowloadManager.swift */; };
@@ -93,6 +96,9 @@
 		182A0ADD1CC9F35700A49759 /* NetWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWork.swift; sourceTree = "<group>"; };
 		1841E6FE1D2F82F500552CD4 /* InfiniteScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScrollView.swift; sourceTree = "<group>"; };
 		184428E91CD1A13A005F6DE1 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		187468851D364DB000BB22AB /* DataConversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataConversion.swift; sourceTree = "<group>"; };
+		187468861D364DB000BB22AB /* DataMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataMap.swift; sourceTree = "<group>"; };
+		187468891D364DCF00BB22AB /* ViewTapBlockProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTapBlockProtocol.swift; sourceTree = "<group>"; };
 		18B0383C1CD2FD910097178D /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		18DC9A021CCF4E6B000D4C6B /* NavigatorHiddenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorHiddenTableViewCell.swift; sourceTree = "<group>"; };
 		18DC9A051CD0685D000D4C6B /* ImageView+MLImageDowload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageView+MLImageDowload.swift"; sourceTree = "<group>"; };
@@ -208,6 +214,7 @@
 			children = (
 				169EA3AD1CE89BE400239F15 /* CarouselView.swift */,
 				1841E6FE1D2F82F500552CD4 /* InfiniteScrollView.swift */,
+				187468891D364DCF00BB22AB /* ViewTapBlockProtocol.swift */,
 			);
 			name = Carousel;
 			sourceTree = "<group>";
@@ -231,6 +238,8 @@
 		184008DE1D3612AA00272DB1 /* DataConversion */ = {
 			isa = PBXGroup;
 			children = (
+				187468851D364DB000BB22AB /* DataConversion.swift */,
+				187468861D364DB000BB22AB /* DataMap.swift */,
 			);
 			name = DataConversion;
 			sourceTree = "<group>";
@@ -563,12 +572,14 @@
 				18FD05A71CE1B5AB0041837E /* SecondViewController.swift in Sources */,
 				169EA3AE1CE89BE400239F15 /* CarouselView.swift in Sources */,
 				16198EBF1CC507990078919A /* ViewController.swift in Sources */,
+				1874688B1D364DCF00BB22AB /* ViewTapBlockProtocol.swift in Sources */,
 				18DC9A081CD068FC000D4C6B /* MLImageDowloadManager.swift in Sources */,
 				16198EBD1CC507990078919A /* AppDelegate.swift in Sources */,
 				18E9125F1CE5CA1400360D54 /* Actions.swift in Sources */,
 				18FD05A91CE1D9920041837E /* String+MD5.swift in Sources */,
 				18DC9A061CD0685D000D4C6B /* ImageView+MLImageDowload.swift in Sources */,
 				18092AD41CC625EC00E74EBD /* SpringViewController.swift in Sources */,
+				187468871D364DB000BB22AB /* DataConversion.swift in Sources */,
 				16CF416E1CF0091E005E33D0 /* HomeViewController.swift in Sources */,
 				1841E6FF1D2F82F500552CD4 /* InfiniteScrollView.swift in Sources */,
 				16AF032D1CE889CC00452DD1 /* AppDispatcher.swift in Sources */,
@@ -582,6 +593,7 @@
 				18DC9A0A1CD0917E000D4C6B /* MLImageDowloader.swift in Sources */,
 				16C503AC1CCB63C900D074ED /* StoreModel.swift in Sources */,
 				18DC9A031CCF4E6B000D4C6B /* NavigatorHiddenTableViewCell.swift in Sources */,
+				187468881D364DB000BB22AB /* DataMap.swift in Sources */,
 				16BFD6871CD257AF00EB70F5 /* AuthorModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
