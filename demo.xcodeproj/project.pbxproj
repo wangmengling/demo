@@ -29,11 +29,18 @@
 		181477A91CCDBFDA00481D54 /* TopicsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181477A81CCDBFDA00481D54 /* TopicsModel.swift */; };
 		1822021F1CDC9E7F000EB50B /* MLImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1822021E1CDC9E7F000EB50B /* MLImageCache.swift */; };
 		182A0ADE1CC9F35700A49759 /* NetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182A0ADD1CC9F35700A49759 /* NetWork.swift */; };
+		183A9D021D3F191200A4F5D9 /* StorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183A9D011D3F191200A4F5D9 /* StorageProtocol.swift */; };
+		183A9D041D3F1ACC00A4F5D9 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183A9D031D3F1ACC00A4F5D9 /* Storage.swift */; };
+		183A9D061D3F4E6500A4F5D9 /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183A9D051D3F4E6500A4F5D9 /* SQLiteManager.swift */; };
+		183A9D0A1D3F5B7300A4F5D9 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 183A9D091D3F5B7300A4F5D9 /* libsqlite3.0.tbd */; };
+		183A9D101D3F63E800A4F5D9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183A9D0F1D3F63E800A4F5D9 /* Extensions.swift */; };
+		183A9D121D3F7CF800A4F5D9 /* SrorageToSQLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183A9D111D3F7CF800A4F5D9 /* SrorageToSQLite.swift */; };
 		1841E6FF1D2F82F500552CD4 /* InfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841E6FE1D2F82F500552CD4 /* InfiniteScrollView.swift */; };
 		184428EA1CD1A13A005F6DE1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184428E91CD1A13A005F6DE1 /* Image.swift */; };
 		187468871D364DB000BB22AB /* DataConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187468851D364DB000BB22AB /* DataConversion.swift */; };
 		187468881D364DB000BB22AB /* DataMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187468861D364DB000BB22AB /* DataMap.swift */; };
 		1874688B1D364DCF00BB22AB /* ViewTapBlockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187468891D364DCF00BB22AB /* ViewTapBlockProtocol.swift */; };
+		18A839281D3CBE6D0052F689 /* DataConversionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A839271D3CBE6D0052F689 /* DataConversionProtocol.swift */; };
 		18DC9A031CCF4E6B000D4C6B /* NavigatorHiddenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC9A021CCF4E6B000D4C6B /* NavigatorHiddenTableViewCell.swift */; };
 		18DC9A061CD0685D000D4C6B /* ImageView+MLImageDowload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC9A051CD0685D000D4C6B /* ImageView+MLImageDowload.swift */; };
 		18DC9A081CD068FC000D4C6B /* MLImageDowloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC9A071CD068FC000D4C6B /* MLImageDowloadManager.swift */; };
@@ -94,11 +101,20 @@
 		181477A81CCDBFDA00481D54 /* TopicsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsModel.swift; sourceTree = "<group>"; };
 		1822021E1CDC9E7F000EB50B /* MLImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLImageCache.swift; sourceTree = "<group>"; };
 		182A0ADD1CC9F35700A49759 /* NetWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWork.swift; sourceTree = "<group>"; };
+		183A9D011D3F191200A4F5D9 /* StorageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageProtocol.swift; sourceTree = "<group>"; };
+		183A9D031D3F1ACC00A4F5D9 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		183A9D051D3F4E6500A4F5D9 /* SQLiteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
+		183A9D071D3F5A6C00A4F5D9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		183A9D091D3F5B7300A4F5D9 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		183A9D0B1D3F5BB500A4F5D9 /* demo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "demo-Bridging-Header.h"; sourceTree = "<group>"; };
+		183A9D0F1D3F63E800A4F5D9 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		183A9D111D3F7CF800A4F5D9 /* SrorageToSQLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SrorageToSQLite.swift; sourceTree = "<group>"; };
 		1841E6FE1D2F82F500552CD4 /* InfiniteScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScrollView.swift; sourceTree = "<group>"; };
 		184428E91CD1A13A005F6DE1 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		187468851D364DB000BB22AB /* DataConversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataConversion.swift; sourceTree = "<group>"; };
 		187468861D364DB000BB22AB /* DataMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataMap.swift; sourceTree = "<group>"; };
 		187468891D364DCF00BB22AB /* ViewTapBlockProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTapBlockProtocol.swift; sourceTree = "<group>"; };
+		18A839271D3CBE6D0052F689 /* DataConversionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataConversionProtocol.swift; sourceTree = "<group>"; };
 		18B0383C1CD2FD910097178D /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		18DC9A021CCF4E6B000D4C6B /* NavigatorHiddenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorHiddenTableViewCell.swift; sourceTree = "<group>"; };
 		18DC9A051CD0685D000D4C6B /* ImageView+MLImageDowload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageView+MLImageDowload.swift"; sourceTree = "<group>"; };
@@ -120,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183A9D0A1D3F5B7300A4F5D9 /* libsqlite3.0.tbd in Frameworks */,
 				8AFEB66F4B73E747DF9C9D4B /* Pods_demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,11 +252,24 @@
 			name = ViewModels;
 			sourceTree = "<group>";
 		};
+		183A9D001D3F18E300A4F5D9 /* ObjectStorage */ = {
+			isa = PBXGroup;
+			children = (
+				183A9D011D3F191200A4F5D9 /* StorageProtocol.swift */,
+				183A9D031D3F1ACC00A4F5D9 /* Storage.swift */,
+				183A9D051D3F4E6500A4F5D9 /* SQLiteManager.swift */,
+				183A9D111D3F7CF800A4F5D9 /* SrorageToSQLite.swift */,
+				183A9D0F1D3F63E800A4F5D9 /* Extensions.swift */,
+			);
+			name = ObjectStorage;
+			sourceTree = "<group>";
+		};
 		184008DE1D3612AA00272DB1 /* DataConversion */ = {
 			isa = PBXGroup;
 			children = (
 				187468851D364DB000BB22AB /* DataConversion.swift */,
 				187468861D364DB000BB22AB /* DataMap.swift */,
+				18A839271D3CBE6D0052F689 /* DataConversionProtocol.swift */,
 			);
 			name = DataConversion;
 			sourceTree = "<group>";
@@ -287,6 +317,7 @@
 		18E912501CE5C0A600360D54 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				183A9D001D3F18E300A4F5D9 /* ObjectStorage */,
 				184008DE1D3612AA00272DB1 /* DataConversion */,
 				18E912531CE5C11400360D54 /* MLAnimate */,
 				18DC9A041CD06194000D4C6B /* MLImageDowload */,
@@ -298,6 +329,7 @@
 		18E912511CE5C0C000360D54 /* Files */ = {
 			isa = PBXGroup;
 			children = (
+				183A9D0B1D3F5BB500A4F5D9 /* demo-Bridging-Header.h */,
 				16198EBC1CC507990078919A /* AppDelegate.swift */,
 				18B0383C1CD2FD910097178D /* MyPlayground.playground */,
 				16198EC31CC507990078919A /* Assets.xcassets */,
@@ -374,6 +406,8 @@
 		B8E28A97BD75BAE1777182C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				183A9D091D3F5B7300A4F5D9 /* libsqlite3.0.tbd */,
+				183A9D071D3F5A6C00A4F5D9 /* libsqlite3.tbd */,
 				1D8C722158FAC5DF685B2235 /* Pods.framework */,
 				7D47959301BF4908785547A2 /* Pods_demo.framework */,
 			);
@@ -573,13 +607,17 @@
 				169EA3AE1CE89BE400239F15 /* CarouselView.swift in Sources */,
 				16198EBF1CC507990078919A /* ViewController.swift in Sources */,
 				1874688B1D364DCF00BB22AB /* ViewTapBlockProtocol.swift in Sources */,
+				18A839281D3CBE6D0052F689 /* DataConversionProtocol.swift in Sources */,
 				18DC9A081CD068FC000D4C6B /* MLImageDowloadManager.swift in Sources */,
 				16198EBD1CC507990078919A /* AppDelegate.swift in Sources */,
 				18E9125F1CE5CA1400360D54 /* Actions.swift in Sources */,
+				183A9D021D3F191200A4F5D9 /* StorageProtocol.swift in Sources */,
 				18FD05A91CE1D9920041837E /* String+MD5.swift in Sources */,
+				183A9D041D3F1ACC00A4F5D9 /* Storage.swift in Sources */,
 				18DC9A061CD0685D000D4C6B /* ImageView+MLImageDowload.swift in Sources */,
 				18092AD41CC625EC00E74EBD /* SpringViewController.swift in Sources */,
 				187468871D364DB000BB22AB /* DataConversion.swift in Sources */,
+				183A9D101D3F63E800A4F5D9 /* Extensions.swift in Sources */,
 				16CF416E1CF0091E005E33D0 /* HomeViewController.swift in Sources */,
 				1841E6FF1D2F82F500552CD4 /* InfiniteScrollView.swift in Sources */,
 				16AF032D1CE889CC00452DD1 /* AppDispatcher.swift in Sources */,
@@ -587,7 +625,9 @@
 				18FC68A21CCA2619005C512D /* JsonModel.swift in Sources */,
 				184428EA1CD1A13A005F6DE1 /* Image.swift in Sources */,
 				16CBE3891CC5135C00A3699F /* Pop.swift in Sources */,
+				183A9D061D3F4E6500A4F5D9 /* SQLiteManager.swift in Sources */,
 				18FC68A41CCA2AEB005C512D /* UserModel.swift in Sources */,
+				183A9D121D3F7CF800A4F5D9 /* SrorageToSQLite.swift in Sources */,
 				18092AD61CC757CD00E74EBD /* NavigatorHiddenTableViewController.swift in Sources */,
 				16AF03301CE88C3F00452DD1 /* Stores.swift in Sources */,
 				18DC9A0A1CD0917E000D4C6B /* MLImageDowloader.swift in Sources */,
@@ -739,6 +779,7 @@
 			baseConfigurationReference = 35E00ABFC908108D0E42B158 /* Pods-demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = demo/Info.plist;
@@ -747,6 +788,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = wang.demos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "demo/demo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -755,6 +798,7 @@
 			baseConfigurationReference = 1489CFE5737C62C5AB7924B6 /* Pods-demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = demo/Info.plist;
@@ -763,6 +807,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = wang.demos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "demo/demo-Bridging-Header.h";
 			};
 			name = Release;
 		};

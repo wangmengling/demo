@@ -31,3 +31,22 @@ struct AuthorsModel: Mappable {
         loginname <- map["loginname"]
     }
 }
+
+struct AuthorssModel: DataConversionProtocol {
+    var avatar_url: String?
+    var loginname: String?
+    //    func setupReplaceObjectClass() -> [String : String] {
+    //        return [:]
+    //    }
+//    init?(_ map: Map) {
+//        
+//    }
+    init?(){
+        
+    }
+    
+    mutating func mapping(map: DataMap) {
+        avatar_url <-> map["avatar_url"]
+        loginname <-> map["loginname"]
+    }
+}

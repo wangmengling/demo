@@ -49,7 +49,12 @@ struct NetWorkManager {
     //请求并异步返回数据
     mutating func fireTask() {
         task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-            let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+            let json: AnyObject?
+            do {
+                json = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+            } catch let error {
+                print(error)
+            }
             self.callback(data: json, response: response, error: error)
         })
         task.resume()
