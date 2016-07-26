@@ -149,7 +149,11 @@ extension NavigatorHiddenTableViewController {
             var topic = topicsssModelArray.first! as TopicsssModel
 //            Storage().add(topicsssModelArray)
             topic.author_id = nil
-            Storage().add(topic)
+//            Storage().add(topic)
+            var storage = Storage<TopicsssModel>()
+            storage.addArray(topicsssModelArray)
+//            let array = Storage<TopicsssModel>().objects()
+//            print(array)
 //            print(topicsssModelArray)
 //            let datas = data.objectForKey("data")
 //            let d = DataConversion(TopicModel()).mapArray(data)

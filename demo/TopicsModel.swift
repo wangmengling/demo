@@ -75,8 +75,8 @@ struct TopicsssModel:DataConversionProtocol {
     var content: String?
     var title: String?
     var visit_count: TopicVisitCountEnum? = TopicVisitCountEnum.Default
-    var reply_count: Int = 0
-    var top:Bool = false
+//    var reply_count: Int = 0
+//    var top:Bool = false
     
     init(){
         
