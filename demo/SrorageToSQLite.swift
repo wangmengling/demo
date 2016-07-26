@@ -29,10 +29,39 @@ struct SrorageToSQLite {
     }
 }
 
-
 extension SrorageToSQLite {
-    
+    func count(object:E) -> Int {
+        if object.primaryKey().characters.count < 1 {
+            return 0
+        }
+        let objectsMirror = Mirror(reflecting: object)
+        let property = objectsMirror.children.flatMap { (child) -> (label: String?, value: Any)? in
+            if child.label != object.primaryKey(){
+                return nil
+            }
+            return child
+        }
+        
+        if property.count > 0{
+            let firstValue = property.first
+            var primaryKeyValue = self.proToColumnValues(firstValue!.value)
+            primaryKeyValue = primaryKeyValue.subString(0, length: primaryKeyValue.characters.count - 1)
+            let countSql = "SELECT COUNT(*) AS count FROM \(String(objectsMirror.subjectType)) WHERE \(object.primaryKey()) = \(primaryKeyValue)"
+            sqliteManager.count(countSql)
+        }
+        return 0
+    }
 }
+
+// MARK: - Update Data To Table
+extension SrorageToSQLite {
+    func update(object:E) -> Bool {
+        
+        return true
+    }
+}
+
+
 
 // MARK: - Insert Data To Table
 extension SrorageToSQLite {

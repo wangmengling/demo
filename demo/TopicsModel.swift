@@ -78,6 +78,11 @@ struct TopicsssModel:DataConversionProtocol {
 //    var reply_count: Int = 0
 //    var top:Bool = false
     
+    func primaryKey() -> String {
+        //        self.description = self.
+        return "author_id"
+    }
+    
     init(){
         
     }

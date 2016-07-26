@@ -58,9 +58,28 @@ extension SQLiteManager {
     }
 }
 
-
 extension SQLiteManager {
     
+    /// 执行查询操作(将查询到的结果返回到一个字典数组中)
+    func count(querySQL : String) -> Int {
+        
+        // 1.定义游标指针
+        var stmt : COpaquePointer = nil
+        
+        if sqlite3_prepare_v2(db, querySQL, -1, &stmt, nil) != SQLITE_OK {
+            print("没有准备好查询")
+            return 0
+        }
+        
+        // 3.查看是否有下一条语句
+        let d = sqlite3_step(stmt)
+        print(d)
+        return 0
+    }
+}
+
+
+extension SQLiteManager {
     
     func execSQL(sqlString : String) -> Bool {
         var error:UnsafeMutablePointer<CChar> = nil

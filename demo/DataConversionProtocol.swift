@@ -11,6 +11,7 @@ public protocol DataConversionProtocol{
     init?()
     /// This function is where all variable mappings should occur. It is executed by Mapper during the mapping (serialization and deserialization) process.
     mutating func mapping(map: DataMap)
+    func primaryKey() -> String
 //    var description: String { get }
 }
 
