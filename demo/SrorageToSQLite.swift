@@ -17,39 +17,53 @@ import Foundation
 struct SrorageToSQLite {
     internal typealias E = DataConversionProtocol
     var sqliteManager = SQLiteManager.instanceManager
-    
     static let instanceManager:SrorageToSQLite = {
         return SrorageToSQLite()
     }()
     
-    mutating func objectToSQLite(object:E) -> [[String : AnyObject]] {
-        let objectsMirror = Mirror(reflecting: object)
-        let selectSQL = "SELECT * FROM  \(String(objectsMirror.subjectType));"
-        return sqliteManager.fetchArray(selectSQL)
+    
+    
+}
+
+// MARK: - filter sorted
+extension SrorageToSQLite {
+    
+    
+    func filter(predicate:String) -> String{
+        var filter = ""
+        if predicate.characters.count > 1 {
+            filter = " Where "+predicate
+        }
+        return filter
+    }
+    
+    mutating func sorted(property: String, ascending: Bool = true) {
+        
     }
 }
 
 extension SrorageToSQLite {
-    func count(object:E) -> Int {
-        if object.primaryKey().characters.count < 1 {
-            return 0
-        }
+    func count(object:E,filter:String = "") -> Int {
+        var count = 0
+        //关键字 来计算count
         let objectsMirror = Mirror(reflecting: object)
-        let property = objectsMirror.children.flatMap { (child) -> (label: String?, value: Any)? in
-            if child.label != object.primaryKey(){
-                return nil
-            }
-            return child
-        }
-        
-        if property.count > 0{
-            let firstValue = property.first
-            var primaryKeyValue = self.proToColumnValues(firstValue!.value)
-            primaryKeyValue = primaryKeyValue.subString(0, length: primaryKeyValue.characters.count - 1)
-            let countSql = "SELECT COUNT(*) AS count FROM \(String(objectsMirror.subjectType)) WHERE \(object.primaryKey()) = \(primaryKeyValue)"
-            sqliteManager.count(countSql)
-        }
-        return 0
+        let countSql = "SELECT COUNT(*) AS count FROM \(String(objectsMirror.subjectType)) \(self.filter(filter))"
+        count = sqliteManager.count(countSql)
+        return count
+    }
+}
+
+// MARK: - SelectTable
+
+extension SrorageToSQLite {
+    mutating func objectsToSQLite(tableName:String,filter:String = "",sorted:(String,Bool) = ("",false),limit:(Int,Int) = (0,10)) -> [[String : AnyObject]]? {
+        let selectSQL = "SELECT * FROM  \(tableName)) \(self.filter(filter));"
+        return sqliteManager.fetchArray(selectSQL)
+    }
+    
+    mutating func objectToSQLite(tableName:String,filter:String = "") -> [String : AnyObject]? {
+        let objectSQL = "SELECT * FROM  \(tableName) \(self.filter(filter)) LIMIT 0,1"
+        return sqliteManager.fetchArray(objectSQL).last
     }
 }
 
@@ -59,14 +73,16 @@ extension SrorageToSQLite {
         
         return true
     }
+    
+    func delete() -> Bool {
+        return true
+    }
 }
 
 
 
 // MARK: - Insert Data To Table
 extension SrorageToSQLite {
-    
-    
     func insert(object:E) -> Bool {
         
         let objectsMirror = Mirror(reflecting: object)

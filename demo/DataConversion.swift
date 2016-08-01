@@ -40,25 +40,25 @@ extension DataConversion {
         return result
     }
     
-    public func mapArray(JSON: AnyObject?) -> [E]? {
+    public func mapArray(JSON: AnyObject?) -> [E] {
         if let JSONArray = JSON as? [[String : AnyObject]] {
             return mapArray(JSONArray)
         }
-        return nil
+        return []
     }
     
-    public func mapArray(JSONString:String) -> [E]? {
+    public func mapArray(JSONString:String) -> [E] {
         if let JSONArray = self.parseJSONString(JSONString){
             return mapArray(JSONArray)
         }
-        return nil
+        return []
     }
     
-    public func mapArray(JSONData:NSData) -> [E]? {
+    public func mapArray(JSONData:NSData) -> [E] {
         if let JSONArray = self.parseJSONData(JSONData){
             return mapArray(JSONArray)
         }
-        return nil
+        return []
     }
 }
 

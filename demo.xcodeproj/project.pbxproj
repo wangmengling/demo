@@ -257,8 +257,8 @@
 			children = (
 				183A9D011D3F191200A4F5D9 /* StorageProtocol.swift */,
 				183A9D031D3F1ACC00A4F5D9 /* Storage.swift */,
-				183A9D051D3F4E6500A4F5D9 /* SQLiteManager.swift */,
 				183A9D111D3F7CF800A4F5D9 /* SrorageToSQLite.swift */,
+				183A9D051D3F4E6500A4F5D9 /* SQLiteManager.swift */,
 				183A9D0F1D3F63E800A4F5D9 /* Extensions.swift */,
 			);
 			name = ObjectStorage;

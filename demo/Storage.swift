@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+
 public struct Storage<Element:DataConversionProtocol> {
     public typealias E = Element
     private lazy var srorageToSQLite = SrorageToSQLite.instanceManager
@@ -22,46 +24,29 @@ public struct Storage<Element:DataConversionProtocol> {
 }
 
 extension Storage {
-    mutating func objects() -> Array<E>? {
+    
+    mutating func objects(filter:String = "",sorted:(String,Bool) = ("",false),limit:(Int,Int) = (0,10)) -> Array<E> {
         if let object = E() {
-            let dicArray = srorageToSQLite.objectToSQLite(object)
+            let dicArray = srorageToSQLite.objectsToSQLite(self.tableName(object))
             let data:DataConversion =  DataConversion<E>()
             let objectArray = data.mapArray(dicArray)
             return objectArray
         }
-        return nil
+        return Array<E>()
     }
     
-    public func object() -> E? {
+    public mutating func object(filter:String) -> E? {
+        if let object = E() {
+            let dic = srorageToSQLite.objectToSQLite(self.tableName(object),filter: filter)
+            let data:DataConversion =  DataConversion<E>()
+            let object = data.map(dic)
+            return object
+        }
         return nil
     }
 }
 
 extension Storage {
-    public func filter(predicateFormat: String, _ args: AnyObject...) -> Array<E> {
-        return []
-    }
-    
-    /**
-     Returns a `Results` containing all objects matching the given predicate in the results collection.
-     
-     - parameter predicate: The predicate with which to filter the objects.
-     */
-    public func filter(predicate: NSPredicate) -> Array<E> {
-        return []
-    }
-}
-
-extension Storage {
-//    mutating func add(object:E) {
-//        guard let object:E = object else {
-//            return
-//        }
-//        if !srorageToSQLite.tableIsExists(object){
-//            srorageToSQLite.createTable(object)
-//        }
-//        srorageToSQLite.insert(object)
-//    }
     
     /**
      add or update Object
@@ -104,5 +89,8 @@ extension Storage {
 }
 
 extension Storage {
-    
+    public func tableName(object:E) -> String {
+        let objectsMirror = Mirror(reflecting: object)
+        return String(objectsMirror.subjectType)
+    }
 }

@@ -54,6 +54,7 @@ extension SQLiteManager {
             return ""
         }
         let dbPath = (path as NSString).stringByAppendingPathComponent(dbName)
+        print(dbPath)
         return dbPath
     }
 }
@@ -62,19 +63,23 @@ extension SQLiteManager {
     
     /// 执行查询操作(将查询到的结果返回到一个字典数组中)
     func count(querySQL : String) -> Int {
-        
+        var count = 0
         // 1.定义游标指针
         var stmt : COpaquePointer = nil
         
         if sqlite3_prepare_v2(db, querySQL, -1, &stmt, nil) != SQLITE_OK {
             print("没有准备好查询")
-            return 0
+            return count
         }
-        
         // 3.查看是否有下一条语句
-        let d = sqlite3_step(stmt)
-        print(d)
-        return 0
+        if sqlite3_step(stmt) == SQLITE_ROW {
+            guard let value = getColumnValue(Int32(0), type: SQLITE_INTEGER, stmt: stmt) else {
+                return count
+            }
+            count = value as! Int
+        }
+        sqlite3_finalize(stmt)
+        return count
     }
 }
 
