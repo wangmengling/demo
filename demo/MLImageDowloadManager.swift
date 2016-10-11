@@ -9,7 +9,7 @@
 import UIKit
 
 //下载进度
-public typealias DownloadProgressBlock = ((receivedSize: Int64, totalSize: Int64 , originData: NSData?) -> ())
+public typealias DownloadProgressBlock = ((_ receivedSize: Int64, _ totalSize: Int64 , _ originData: Data?) -> ())
 
 private let instance = MLImageDowloadManager()
 
@@ -28,7 +28,7 @@ class MLImageDowloadManager {
 // MARK: - 获取image
 extension MLImageDowloadManager {
     
-    func reciveImageResoure(URL: NSURL,
+    func reciveImageResoure(_ URL: Foundation.URL,
                             progressBlock: DownloadProgressBlock? = nil,
                             completionHandler:MLImageDownloaderCompletionHandler? = nil) -> Void{
         self.reciveImageFromCache(URL, progressBlock: progressBlock, completionHandler: completionHandler)
@@ -41,7 +41,7 @@ extension MLImageDowloadManager {
      - parameter progressBlock:     <#progressBlock description#>
      - parameter completionHandler: <#completionHandler description#>
      */
-    func reciveImageFromCache(URL:NSURL,
+    func reciveImageFromCache(_ URL:Foundation.URL,
                               progressBlock: DownloadProgressBlock? = nil,
                               completionHandler:MLImageDownloaderCompletionHandler? = nil) -> Void {
         imageCache.receiveImageForKey(URL.absoluteString) { (image, cacheType) in
@@ -60,9 +60,9 @@ extension MLImageDowloadManager {
      - parameter progressBlock:     <#progressBlock description#>
      - parameter completionHandler: <#completionHandler description#>
      */
-    func reciveImageFromWithUrlToCache(URL: NSURL,
+    func reciveImageFromWithUrlToCache(_ URL: Foundation.URL,
                                        progressBlock: DownloadProgressBlock,
-                                       completionHandler:MLImageDownloaderCompletionHandler) -> Void {
+                                       completionHandler:@escaping MLImageDownloaderCompletionHandler) -> Void {
         self.imageDowloader.downloaderImage(URL, progressBlock: progressBlock) { (image, error, cacheType, imageURL, originalData) in
             if (image != nil) {
                 self.imageCache.storageImage(image!, originalData: originalData!, key: URL.absoluteString,isFileCache: true)

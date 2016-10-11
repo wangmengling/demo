@@ -18,7 +18,7 @@ class NavigatorHiddenTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -31,7 +31,7 @@ class NavigatorHiddenTableViewCell: UITableViewCell {
             print(self.topicsModel?.author?.avatar_url)
         }
         if ((self.topicsModel?.author?.avatar_url) != nil) {
-            let url = NSURL(string: (self.topicsModel?.author?.avatar_url!)!)!
+            let url = URL(string: (self.topicsModel?.author?.avatar_url!)!)!
 //            let url = NSURL(string: "https://avatars.githubusercontent.com/u/1011681?v=3&s=120")
 //             self.avatarImageView.kf_setImageWithURL(url)
             self.avatarImageView.set_MLImageWithURL(url)

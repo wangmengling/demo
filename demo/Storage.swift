@@ -11,7 +11,7 @@ import Foundation
 
 public struct Storage<Element:DataConversionProtocol> {
     public typealias E = Element
-    private lazy var srorageToSQLite = SrorageToSQLite.instanceManager
+    fileprivate lazy var srorageToSQLite = SrorageToSQLite.instanceManager
     
 //    public static let instanceManager:Storage<E> = {
 //        return Storage<E>()
@@ -25,7 +25,7 @@ public struct Storage<Element:DataConversionProtocol> {
 
 extension Storage {
     
-    mutating func objects(filter:String = "",sorted:(String,Bool) = ("",false),limit:(Int,Int) = (0,10)) -> Array<E> {
+    mutating func objects(_ filter:String = "",sorted:(String,Bool) = ("",false),limit:(Int,Int) = (0,10)) -> Array<E> {
         if let object = E() {
             let dicArray = srorageToSQLite.objectsToSQLite(self.tableName(object))
             let data:DataConversion =  DataConversion<E>()
@@ -35,7 +35,7 @@ extension Storage {
         return Array<E>()
     }
     
-    public mutating func object(filter:String) -> E? {
+    public mutating func object(_ filter:String) -> E? {
         if let object = E() {
             let dic = srorageToSQLite.objectToSQLite(self.tableName(object),filter: filter)
             let data:DataConversion =  DataConversion<E>()
@@ -54,7 +54,7 @@ extension Storage {
      - parameter object: <#object description#>
      - parameter update: <#update description#>
      */
-    mutating func add(object:E,update:Bool = false)  {
+    mutating func add(_ object:E,update:Bool = false)  {
         guard let object:E = object else {
             return
         }
@@ -68,18 +68,18 @@ extension Storage {
         srorageToSQLite.insert(object)
     }
     
-    mutating func addArray(objectArray:[E]?) {
+    mutating func addArray(_ objectArray:[E]?) {
         guard let objectArray = objectArray else {
             return
         }
-        for (_,element) in objectArray.enumerate() {
+        for (_,element) in objectArray.enumerated() {
             self.add(element)
         }
     }
 }
 
 extension Storage {
-    public func delete(object:E)  {
+    public func delete(_ object:E)  {
         
     }
     
@@ -89,8 +89,8 @@ extension Storage {
 }
 
 extension Storage {
-    public func tableName(object:E) -> String {
+    public func tableName(_ object:E) -> String {
         let objectsMirror = Mirror(reflecting: object)
-        return String(objectsMirror.subjectType)
+        return String(describing: objectsMirror.subjectType)
     }
 }

@@ -17,7 +17,7 @@ enum Method: String {
  *  网络请求
  */
 struct NetWork {
-    static func request(method: Method, url: String, params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>(), callback: (data: AnyObject!, response: NSURLResponse!, error: NSError!) -> Void) {
+    static func request(_ method: Method, url: String, params: Dictionary<String, AnyObject> = Dictionary<String, AnyObject>(), callback: @escaping (_ data: AnyObject?, _ response: URLResponse?, _ error: NSError?) -> Void) {
         var manager = NetWorkManager(method: method, url: url, params: params, callback: callback)
         manager.resume()
     }
@@ -33,28 +33,28 @@ struct NetWorkManager {
     var request:NSMutableURLRequest!
     
     //NSURLSession
-    let session:NSURLSession! = NSURLSession.sharedSession()
-    let callback: (data: AnyObject!, response: NSURLResponse!, error: NSError!) -> Void
-    var task: NSURLSessionTask!
+    let session:URLSession! = URLSession.shared
+    let callback: (_ data: AnyObject?, _ response: URLResponse?, _ error: NSError?) -> Void
+    var task: URLSessionTask!
     
     
-    init(method:Method, url:String, params:Dictionary<String, AnyObject> = Dictionary<String, AnyObject>(), callback: (data: AnyObject!, response: NSURLResponse!, error: NSError!) -> Void) {
+    init(method:Method, url:String, params:Dictionary<String, AnyObject> = Dictionary<String, AnyObject>(), callback: @escaping (_ data: AnyObject?, _ response: URLResponse?, _ error: NSError?) -> Void) {
         self.method = method
         self.params = params
         self.url = url
         self.callback = callback
-        self.request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        self.request = NSMutableURLRequest(url: URL(string: url)!)
     }
     
     //请求并异步返回数据
     mutating func fireTask() {
-        task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+        task = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
             if data == nil {
                 return
             }
             let json: AnyObject?
             do {
-                json = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+                json = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
             } catch let error {
                 print(error)
             }
@@ -73,10 +73,10 @@ struct NetWorkManager {
 extension NetWorkManager {
     mutating func buildRequest() {
         if self.method == .GET && self.params.count > 0 {
-            self.request = NSMutableURLRequest(URL: NSURL(string: url + "?" + buildParams(self.params))!)
+            self.request = NSMutableURLRequest(url: URL(string: url + "?" + buildParams(self.params))!)
         }
          
-        request.HTTPMethod = self.method.rawValue
+        request.httpMethod = self.method.rawValue
         
         if self.params.count > 0 {
             request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
@@ -88,7 +88,7 @@ extension NetWorkManager {
     //非GET
     func buildBody() {
         if self.params.count > 0 && self.method != .GET {
-            request.HTTPBody = buildParams(self.params).dataUsingEncoding(NSUTF8StringEncoding)
+            request.httpBody = buildParams(self.params).data(using: String.Encoding.utf8)
         }
     }
 }
@@ -97,17 +97,17 @@ extension NetWorkManager {
 extension NetWorkManager {
     // 从 Alamofire 偷了三个函数
     
-    func buildParams(parameters: [String: AnyObject]) -> String {
+    func buildParams(_ parameters: [String: AnyObject]) -> String {
         var components: [(String, String)] = []
-        for key in Array(parameters.keys).sort(<) {
+        for key in Array(parameters.keys).sorted(by: <) {
             let value: AnyObject! = parameters[key]
             components += self.queryComponents(key, value)
         }
         
-        return (components.map{"\($0)=\($1)"} as [String]).joinWithSeparator("&")
+        return (components.map{"\($0)=\($1)"} as [String]).joined(separator: "&")
     }
     
-    func queryComponents(key: String, _ value: AnyObject) -> [(String, String)] {
+    func queryComponents(_ key: String, _ value: AnyObject) -> [(String, String)] {
         var components: [(String, String)] = []
         if let dictionary = value as? [String: AnyObject] {
             for (nestedKey, value) in dictionary {
@@ -118,14 +118,14 @@ extension NetWorkManager {
                 components += queryComponents("\(key)", value)
             }
         } else {
-            components.appendContentsOf([(escape(key), escape("\(value)"))])
+            components.append(contentsOf: [(escape(key), escape("\(value)"))])
         }
         
         return components
     }
     
-    func escape(string: String) -> String {
-        let legalURLCharactersToBeEscaped: CFStringRef = ":&=;+!@#$()',*"
-        return CFURLCreateStringByAddingPercentEscapes(nil, string, nil, legalURLCharactersToBeEscaped, CFStringBuiltInEncodings.UTF8.rawValue) as String
+    func escape(_ string: String) -> String {
+        let legalURLCharactersToBeEscaped: CFString = ":&=;+!@#$()',*" as CFString
+        return CFURLCreateStringByAddingPercentEscapes(nil, string as CFString!, nil, legalURLCharactersToBeEscaped, CFStringBuiltInEncodings.UTF8.rawValue) as String
     }
 }

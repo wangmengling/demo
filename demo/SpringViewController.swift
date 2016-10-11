@@ -12,7 +12,7 @@ class SpringViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var containerView: UIImageView!
-    let ipadView = UIImageView(frame: CGRectMake(100, 100, 200, 151.5))
+    let ipadView = UIImageView(frame: CGRect(x: 100, y: 100, width: 200, height: 151.5))
 
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var image3View: UIImageView!
@@ -29,13 +29,13 @@ class SpringViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.containerView.addSubview(self.ipadView)
         self.hiddenNavigation()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         ipadView.image = UIImage(named: "top-back_")
@@ -71,26 +71,26 @@ class SpringViewController: UIViewController {
 //            }, completion: nil)
         
         
-        let zoomInScaleTransform = CGAffineTransformMakeScale(0.2, 0.2)
-        UIView.animateKeyframesWithDuration(3, delay: 0, options: [], animations: {
-            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0.2, animations: {
+        let zoomInScaleTransform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+        UIView.animateKeyframes(withDuration: 3, delay: 0, options: [], animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.2, animations: {
                 self.containerView.center.x += self.view.frame.width
                 self.containerView.center.y += -180
                 self.containerView.transform = zoomInScaleTransform
             })
-            UIView.addKeyframeWithRelativeStartTime(0.3, relativeDuration: 0.01, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.01, animations: {
                 self.containerView.alpha = 1
                 self.containerView.transform = zoomInScaleTransform
             })
-            UIView.addKeyframeWithRelativeStartTime(0.3, relativeDuration: 0.5, animations: {
-                self.containerView.transform = CGAffineTransformIdentity
+            UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.5, animations: {
+                self.containerView.transform = CGAffineTransform.identity
                 self.containerView.center.x -= self.view.frame.width
                 self.containerView.center.y += 90
             })
-            UIView.addKeyframeWithRelativeStartTime(0.9, relativeDuration: 0.01, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0.9, relativeDuration: 0.01, animations: {
                 self.containerView.alpha = 1
             })
-            UIView.addKeyframeWithRelativeStartTime(0.9, relativeDuration: 0.2, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0.9, relativeDuration: 0.2, animations: {
                 self.containerView.center.x += 33
             })
             }, completion: { _ in
@@ -99,9 +99,9 @@ class SpringViewController: UIViewController {
     }
     
     
-    func delay(seconds: Double, completion:()->()) {
-        let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64( Double(NSEC_PER_SEC) * seconds ))
-        dispatch_after(popTime, dispatch_get_main_queue()) {
+    func delay(_ seconds: Double, completion:@escaping ()->()) {
+        let popTime = DispatchTime.now() + Double(Int64( Double(NSEC_PER_SEC) * seconds )) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: popTime) {
             completion()
         }
     }
@@ -117,7 +117,7 @@ class SpringViewController: UIViewController {
     }
     */
 
-    @IBAction func buttonAction(sender: AnyObject) {
+    @IBAction func buttonAction(_ sender: AnyObject) {
 //        UIView.transitionWithView(self.lableBackView, duration: 2, options: [.CurveLinear, .TransitionCrossDissolve], animations: {
 //            
 //            }, completion: nil)
@@ -130,8 +130,8 @@ class SpringViewController: UIViewController {
 //            self.image2View.backgroundColor = UIColor(red: 252.0/255.0, green: 155.0/255.0, blue: 65.0/255.0, alpha: 1)
 //        })
         
-        UIView.transitionWithView(self.label, duration: 1.5, options: [.CurveEaseOut, .TransitionFlipFromBottom], animations: {
-            self.label.hidden = true
+        UIView.transition(with: self.label, duration: 1.5, options: [.curveEaseOut, .transitionFlipFromBottom], animations: {
+            self.label.isHidden = true
             // self.someView.hidden = false
             }, completion: nil)
         
@@ -169,7 +169,7 @@ class SpringViewController: UIViewController {
 
 extension SpringViewController {
     func hiddenNavigation(){
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default) //设置导航栏北京
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default) //设置导航栏北京
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
 }

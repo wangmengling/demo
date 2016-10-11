@@ -27,7 +27,7 @@ class NewViewController: UIViewController {
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         
@@ -38,14 +38,14 @@ class NewViewController: UIViewController {
         self.bottomBackVie.alpha = 0
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.backGroundView.center.x += self.view.bounds.width
         })
         
-        UIView.animateWithDuration(0.5, delay: 0.3, options: [ .Autoreverse, .CurveEaseOut], animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.3, options: [ .autoreverse, .curveEaseOut], animations: {
             self.replicatorBackView.center.x += self.view.bounds.width
         }, completion: nil)
         
@@ -91,7 +91,7 @@ class NewViewController: UIViewController {
         replicatorLayer.instanceDelay = 0.3
 //        replicatorLayer.preservesDepth = false
         replicatorLayer.masksToBounds = true
-        replicatorLayer.backgroundColor = UIColor.clearColor().CGColor
+        replicatorLayer.backgroundColor = UIColor.clear.cgColor
         replicatorBackView.layer.addSublayer(replicatorLayer)
         
         
@@ -100,7 +100,7 @@ class NewViewController: UIViewController {
         rectangle.anchorPoint = CGPoint(x: 0, y: 0)
         rectangle.position = CGPoint(x: replicatorBackView.frame.origin.x + 10, y: replicatorBackView.frame.origin.y + 110)
         rectangle.cornerRadius = 2
-        rectangle.backgroundColor = UIColor.redColor().CGColor
+        rectangle.backgroundColor = UIColor.red.cgColor
         replicatorLayer.addSublayer(rectangle)
         
         let moveRectangle = CABasicAnimation(keyPath: "position.y")
@@ -108,14 +108,14 @@ class NewViewController: UIViewController {
         moveRectangle.duration = 0.7
         moveRectangle.autoreverses = true
         moveRectangle.repeatCount = HUGE
-        rectangle.addAnimation(moveRectangle, forKey: nil)
+        rectangle.add(moveRectangle, forKey: nil)
     }
     
     func loading() {
         let replicatorLayer = CAReplicatorLayer()
         replicatorLayer.bounds = CGRect(x: 0, y: 0, width: bottomBackVie.frame.size.width, height: bottomBackVie.frame.size.height)
         replicatorLayer.position = CGPoint(x: bottomBackVie.frame.size.width/2, y: bottomBackVie.frame.size.height/2)
-        replicatorLayer.backgroundColor = UIColor.lightGrayColor().CGColor
+        replicatorLayer.backgroundColor = UIColor.lightGray.cgColor
         replicatorLayer.instanceDelay = 1/15
         replicatorLayer.instanceCount = 15
         replicatorLayer.cornerRadius = 5
@@ -129,7 +129,7 @@ class NewViewController: UIViewController {
         circle.bounds = CGRect(x: 0, y: 0, width: 15, height: 15)
         circle.position = CGPoint(x: bottomBackVie.frame.size.width/2, y: bottomBackVie.frame.size.height/2 - 55)
         circle.cornerRadius = 7.5
-        circle.backgroundColor = UIColor.whiteColor().CGColor
+        circle.backgroundColor = UIColor.white.cgColor
         circle.transform = CATransform3DMakeScale(1, 1, 1)
 
         replicatorLayer.addSublayer(circle)
@@ -141,7 +141,7 @@ class NewViewController: UIViewController {
         scale.toValue = 0.1
         scale.duration = 1
         scale.repeatCount = HUGE
-        circle.addAnimation(scale, forKey: nil)
+        circle.add(scale, forKey: nil)
         
         
         let ca = CAAnimation()

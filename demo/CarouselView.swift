@@ -9,7 +9,7 @@
 import UIKit
 import EasyPeasy
 
-let timeInterval:NSTimeInterval = 2
+let timeInterval:TimeInterval = 2
 
 class CarouselView: UIView, UIScrollViewDelegate{
     
@@ -40,16 +40,16 @@ class CarouselView: UIView, UIScrollViewDelegate{
         }
     }
     
-    var timer:NSTimer!
+    var timer:Timer!
     
     
     //MARK:- Begin
     
     init(){
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
     }
     
-    convenience init(rhs: [Attribute], imageArray: [UIImage!]?) {
+    convenience init(rhs: [Attribute], imageArray: [UIImage?]?) {
         self.init()
         self.rhs = rhs
 //        self.imageArray = []
@@ -70,7 +70,7 @@ class CarouselView: UIView, UIScrollViewDelegate{
         self <- rhs
         
         contentScrollView <- [Left(0),Top(0),Right(0),Bottom(0),Width(self.frame.width),Height(self.frame.height)]
-        self.contentScrollView.contentSize = CGSizeMake(self.frame.width * 3.0, self.frame.height)
+        self.contentScrollView.contentSize = CGSize(width: self.frame.width * 3.0, height: self.frame.height)
         
         pageControl <-  [
             Right(10),
@@ -115,14 +115,14 @@ extension CarouselView {
         contentScrollView = UIScrollView()
         contentScrollView.delegate = self
         contentScrollView.bounces = false
-        contentScrollView.pagingEnabled = true
-        contentScrollView.backgroundColor = UIColor.greenColor()
+        contentScrollView.isPagingEnabled = true
+        contentScrollView.backgroundColor = UIColor.green
         contentScrollView.showsHorizontalScrollIndicator = false
         contentScrollView.showsVerticalScrollIndicator = false
-        contentScrollView.scrollEnabled = true
+        contentScrollView.isScrollEnabled = true
         self.addSubview(contentScrollView)
         
-        self.backgroundColor = UIColor.blueColor()
+        self.backgroundColor = UIColor.blue
         
         
         pageControl = UIPageControl()
@@ -131,7 +131,7 @@ extension CarouselView {
         
         
         currentImageView = UIImageView()
-        self.backgroundColor = UIColor.grayColor()
+        self.backgroundColor = UIColor.gray
         self.contentScrollView.addSubview(currentImageView)
         
         
@@ -147,7 +147,7 @@ extension CarouselView {
         self.currentPageIndex = 0
 //        timer = NSTimer(timeInterval: timeInterval, target: self, selector: #selector(CarouselView.carouseAction), userInfo: nil, repeats: true)
         self.setScrollViewOfImage()
-        timer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: #selector(CarouselView.carouseAction), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(CarouselView.carouseAction), userInfo: nil, repeats: true)
         timer.fire()
     }
 }
@@ -157,18 +157,18 @@ extension CarouselView {
 //        self.currentPageIndex = self.currentPageIndex + 1
 //        self.currentImageView.image = self.imageArray[self.currentPageIndex] as? UIImage
 //        self.contentScrollView.contentOffset = CGPoint(x: CGFloat(self.currentPageIndex)  * self.frame.size.width, y: 0)
-        contentScrollView.setContentOffset(CGPointMake(self.frame.size.width*2, 0), animated: true)
+        contentScrollView.setContentOffset(CGPoint(x: self.frame.size.width*2, y: 0), animated: true)
     }
     
     //MARK: 设置图片
-    private func setScrollViewOfImage(){
+    fileprivate func setScrollViewOfImage(){
         self.currentImageView.image = self.imageArray[self.currentPageIndex] as? UIImage
         self.nextImageView.image = self.imageArray[self.getNextImageIndex(indexOfCurrentImage: self.currentPageIndex)]  as? UIImage
         self.preImageView.image = self.imageArray[self.getLastImageIndex(indexOfCurrentImage: self.currentPageIndex)]  as? UIImage
     }
     
     // 得到上一张图片的下标
-    private func getLastImageIndex(indexOfCurrentImage index: Int) -> Int{
+    fileprivate func getLastImageIndex(indexOfCurrentImage index: Int) -> Int{
         let tempIndex = index - 1
         if tempIndex == -1 {
             return self.imageArray.count - 1
@@ -178,7 +178,7 @@ extension CarouselView {
     }
     
     // 得到下一张图片的下标
-    private func getNextImageIndex(indexOfCurrentImage index: Int) -> Int
+    fileprivate func getNextImageIndex(indexOfCurrentImage index: Int) -> Int
     {
         let tempIndex = index + 1
         return tempIndex < self.imageArray.count ? tempIndex : 0
@@ -188,12 +188,12 @@ extension CarouselView {
 
 extension CarouselView {
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         timer?.invalidate()
         timer = nil
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
         //如果用户手动拖动到了一个整数页的位置就不会发生滑动了 所以需要判断手动调用滑动停止滑动方法
         if !decelerate {
@@ -201,11 +201,11 @@ extension CarouselView {
         }
     }
     
-    func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         print("d")
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         print(self.currentPageIndex)
         let offset = scrollView.contentOffset.x
         if offset == 0 {
@@ -216,16 +216,16 @@ extension CarouselView {
         // 重新布局图片
         self.setScrollViewOfImage()
         //布局后把contentOffset设为中间
-        scrollView.setContentOffset(CGPointMake(self.frame.size.width, 0), animated: false)
+        scrollView.setContentOffset(CGPoint(x: self.frame.size.width, y: 0), animated: false)
         
         //重置计时器
         if timer == nil {
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: #selector(CarouselView.carouseAction), userInfo: nil, repeats: true)
+            self.timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(CarouselView.carouseAction), userInfo: nil, repeats: true)
         }
     }
     
     //时间触发器 设置滑动时动画true，会触发的方法
-    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         print("animator", terminator: "")
         self.scrollViewDidEndDecelerating(contentScrollView)
     }

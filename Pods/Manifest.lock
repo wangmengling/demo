@@ -1,6 +1,6 @@
 PODS:
-  - Alamofire (3.4.0)
-  - EasyPeasy (0.2.3)
+  - Alamofire (3.4.1)
+  - EasyPeasy (0.2.5)
   - Genome (2.0.4):
     - PureJsonSerializer (~> 1.0.0)
   - Kingfisher (2.4.1)
@@ -12,9 +12,9 @@ PODS:
   - RealmSwift (1.0.1):
     - Realm (= 1.0.1)
   - ReSwift (1.0.0)
-  - RxCocoa (2.4):
-    - RxSwift (~> 2.4)
-  - RxSwift (2.4)
+  - RxCocoa (2.5.0):
+    - RxSwift (~> 2.5)
+  - RxSwift (2.5.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -28,8 +28,8 @@ DEPENDENCIES:
   - RxSwift (~> 2.0)
 
 SPEC CHECKSUMS:
-  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
-  EasyPeasy: 8ffc6502c888220d80cbecb53ca188e772d4ea2a
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  EasyPeasy: 5464693877ee078850d5ba7c21216125ff4102ac
   Genome: ee22f71d87eefac0f622f77e75d1fef7f7fa12e7
   Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
   ObjectMapper: 4eb08a726e9791a93b2632049951b56a7c17e471
@@ -37,8 +37,8 @@ SPEC CHECKSUMS:
   Realm: 2e15e39d35b08abb529e212ed5d8af107b5236c8
   RealmSwift: d73ea2af08c3676dbdd5e4b669651a0f492162a4
   ReSwift: 2097946852b045bcc04182b63cdab9ab7fc35812
-  RxCocoa: 7d6cd877de99f5640306b3d6cf87f580c1d91b61
-  RxSwift: 67b9ef4e8b34fb394e200e754c6a09cc16559f94
+  RxCocoa: e1b1562e57a554d0fb2aabf9d71b637f177257c7
+  RxSwift: 402b41a50e922a0368fc14cb3bc9f4427920e8ae
 
 PODFILE CHECKSUM: 4713e24a1a9dd7d115ebc45bf299c0022e4e3e31
 

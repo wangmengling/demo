@@ -8,12 +8,12 @@
 
 import Foundation
 
-public class DataMap {
-    public var JSONDictionary: [String : AnyObject] = [:]
-    public var JSONDataDictionary: [String : AnyObject] = [:]
-    public var currentValue: AnyObject?
-    public var currentKey: String?
-    public var toJSON:Bool = false
+open class DataMap {
+    open var JSONDictionary: [String : AnyObject] = [:]
+    open var JSONDataDictionary: [String : AnyObject] = [:]
+    open var currentValue: AnyObject?
+    open var currentKey: String?
+    open var toJSON:Bool = false
     
     init(JSONDictionary:[String : AnyObject]?){
         guard let JSONDictionary = JSONDictionary else {
@@ -26,7 +26,7 @@ public class DataMap {
         self.toJSON = toJSON
     }
     
-    public subscript(key:String) -> DataMap  {
+    open subscript(key:String) -> DataMap  {
         self.currentKey = key
         // check if a value exists for the current key
         // do this pre-check for performance reasons
@@ -36,12 +36,12 @@ public class DataMap {
         return self
     }
     
-    public func value<T>(@autoclosure defaultValue:() -> T) -> T?{
+    open func value<T>(_ defaultValue:@autoclosure () -> T) -> T?{
         defaultValue()
         return self.currentValue as? T
     }
     
-    public func value<T>() -> T? {
+    open func value<T>() -> T? {
         return currentValue as? T
     }
 }

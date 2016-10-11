@@ -8,7 +8,7 @@
 
 import Foundation
 class AppDispatcher: Dispatcher {
-    private static let shareInstanceD = AppDispatcher()
+    fileprivate static let shareInstanceD = AppDispatcher()
     class var shareInstance: AppDispatcher {
         return shareInstanceD
     }

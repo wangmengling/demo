@@ -30,7 +30,7 @@ class NavigatorHiddenTableViewController: UITableViewController {
         self.title = "我的公司"
         self.navigationController?.navigationItem.prompt = "sfasdf"
         self.navigationItem.title = "sfdaadfasdf"
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         self.automaticallyAdjustsScrollViewInsets = false
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 114
@@ -45,31 +45,31 @@ class NavigatorHiddenTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let url = NSURL(string: "//gravatar.com/avatar/75667f52de5dbe27f5d037d7121bc178?size=48")
+        let url = URL(string: "//gravatar.com/avatar/75667f52de5dbe27f5d037d7121bc178?size=48")
         self.imageView.set_MLImageWithURL(url!)
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return self.topicModelArray.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("NavigatorHiddenTableViewCell", forIndexPath: indexPath) as! NavigatorHiddenTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NavigatorHiddenTableViewCell", for: indexPath) as! NavigatorHiddenTableViewCell
 
         // Configure the cell...
 //        print(self.topicModelArray[indexPath.row] as? TopicsModel)
-        cell.topicsModel = self.topicModelArray[indexPath.row] as? TopicsModel
+        cell.topicsModel = self.topicModelArray[(indexPath as NSIndexPath).row] as? TopicsModel
         return cell
     }
 
@@ -122,7 +122,7 @@ class NavigatorHiddenTableViewController: UITableViewController {
 
 extension NavigatorHiddenTableViewController {
     
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        self.navigationController?.navigationBarHidden = false
 //        var alpha = scrollView.contentOffset.y/64
 //        alpha = (alpha <= 0) ? 0 : alpha
@@ -145,7 +145,7 @@ extension NavigatorHiddenTableViewController {
             
 //            let dds = Mapper().toJSONArray(self.topicModelArray)
             
-            let topicsssModelArray = DataConversion<TopicsssModel>().mapArray(data.objectForKey("data"))!
+            let topicsssModelArray = DataConversion<TopicsssModel>().mapArray(data.object(forKey: "data"))!
             var topic = topicsssModelArray.first! as TopicsssModel
 //            Storage().add(topicsssModelArray)
             var store = Storage<TopicsssModel>()
@@ -162,7 +162,7 @@ extension NavigatorHiddenTableViewController {
         }
     }
     
-    @IBAction func clickAction(sender: AnyObject) {
+    @IBAction func clickAction(_ sender: AnyObject) {
 //        self.getCNodeOrgTopics()
         // 使用的方法和常规 Swift 对象的使用方法类似
         let myDog = Dog()
@@ -186,7 +186,7 @@ extension NavigatorHiddenTableViewController {
         puppies.count // => 1
         
         // 可以在任何一个线程中执行检索操作
-        dispatch_async(dispatch_queue_create("background", nil)) {
+        DispatchQueue(label: "background", attributes: []).async {
             let realm = try! Realm()
             let theDog = realm.objects(Dog).filter("age == 1").first
             try! realm.write {
@@ -203,7 +203,7 @@ class Dog: Object {
 }
 class Person: Object {
     dynamic var name = ""
-    dynamic var picture: NSData? = nil // 支持可选值
+    dynamic var picture: Data? = nil // 支持可选值
     let dogs = List<Dog>()
 }
 

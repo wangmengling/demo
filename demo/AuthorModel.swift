@@ -26,7 +26,7 @@ struct AuthorsModel: Mappable {
         
     }
     
-    mutating func mapping(map: Map) {
+    mutating func mapping(_ map: Map) {
         avatar_url <- map["avatar_url"]
         loginname <- map["loginname"]
     }
@@ -45,7 +45,7 @@ struct AuthorssModel: DataConversionProtocol {
         
     }
     
-    mutating func mapping(map: DataMap) {
+    mutating func mapping(_ map: DataMap) {
         avatar_url <-> map["avatar_url"]
         loginname <-> map["loginname"]
     }

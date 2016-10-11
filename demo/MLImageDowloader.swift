@@ -12,7 +12,7 @@ import UIKit
 public typealias MLImageDownloaderProgressBlock = DownloadProgressBlock
 
 /// Completion block of downloader.
-public typealias MLImageDownloaderCompletionHandler = ((image: UIImage?, error: NSError?, cacheType: CacheType?,  imageURL: NSURL?, originalData: NSData?) -> ())
+public typealias MLImageDownloaderCompletionHandler = ((_ image: UIImage?, _ error: NSError?, _ cacheType: CacheType?,  _ imageURL: URL?, _ originalData: Data?) -> ())
 
 //回调
 typealias CallbackPair = (progressBlock: MLImageDownloaderProgressBlock?, completionHander: MLImageDownloaderCompletionHandler?)
@@ -32,23 +32,23 @@ class MLImageCallbacks  {
 class MLImageDowloader {
     
     /// The duration before the download is timeout. Default is 15 seconds.
-    var downloadTimeout: NSTimeInterval = 15.0
+    var downloadTimeout: TimeInterval = 15.0
     
     var requestsUsePipeling = false
     
     
-    var session: NSURLSession?
-    var sessionDataTask: NSURLSessionDataTask?
+    var session: URLSession?
+    var sessionDataTask: URLSessionDataTask?
     var sessionHandler:MLImageDownloaderSessionHandler?
     
-    var fetchLoads = [NSURL:MLImageCallbacks]() //所有的加载
+    var fetchLoads = [URL:MLImageCallbacks]() //所有的加载
     
     
     
     
-    var sessionConfiguration = NSURLSessionConfiguration.ephemeralSessionConfiguration() {
+    var sessionConfiguration = URLSessionConfiguration.ephemeral {
         didSet {
-            session = NSURLSession(configuration: sessionConfiguration, delegate: sessionHandler, delegateQueue: NSOperationQueue.mainQueue())
+            session = URLSession(configuration: sessionConfiguration, delegate: sessionHandler, delegateQueue: OperationQueue.main)
         }
     }
     
@@ -67,23 +67,23 @@ class MLImageDowloader {
      */
     init(name:String){
         sessionHandler = MLImageDownloaderSessionHandler()
-        session = NSURLSession(configuration: sessionConfiguration, delegate: sessionHandler, delegateQueue: NSOperationQueue.mainQueue())
+        session = URLSession(configuration: sessionConfiguration, delegate: sessionHandler, delegateQueue: OperationQueue.main)
     }
 }
 
 // MARK: - dowloader
 extension MLImageDowloader {
-    func downloaderImage(URL: NSURL,
-                         progressBlock: MLImageDownloaderProgressBlock,
-                         completionHandler:MLImageDownloaderCompletionHandler) -> Void
+    func downloaderImage(_ URL: Foundation.URL,
+                         progressBlock: @escaping MLImageDownloaderProgressBlock,
+                         completionHandler:@escaping MLImageDownloaderCompletionHandler) -> Void
     {
         /// 构建 request
-        let request = NSMutableURLRequest(URL: URL, cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: downloadTimeout)
-        request.HTTPShouldUsePipelining = requestsUsePipeling
+        let request = NSMutableURLRequest(url: URL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: downloadTimeout)
+        request.httpShouldUsePipelining = requestsUsePipeling
         
         /// 构建 dataTask
-        sessionDataTask = session?.dataTaskWithRequest(request)
-        sessionDataTask?.priority = NSURLSessionTaskPriorityDefault
+        sessionDataTask = session?.dataTask(with: request)
+        sessionDataTask?.priority = URLSessionTask.defaultPriority
         self.sessionHandler?.downloadHolder = self
         sessionDataTask?.resume()
         
@@ -94,7 +94,7 @@ extension MLImageDowloader {
 
 // MARK: - register callback
 extension MLImageDowloader {
-    internal func registerProgressBlock(progressBlock:MLImageDownloaderProgressBlock,completionHandler:MLImageDownloaderCompletionHandler, URL:NSURL){
+    internal func registerProgressBlock(_ progressBlock:@escaping MLImageDownloaderProgressBlock,completionHandler:@escaping MLImageDownloaderCompletionHandler, URL:Foundation.URL){
         
         //本次加载数据的回调
         let callBacks = self.fetchLoads[URL] ?? MLImageCallbacks()
@@ -106,7 +106,7 @@ extension MLImageDowloader {
         
     }
     
-    func fetchLoadForKey(URL: NSURL) -> MLImageCallbacks? {
+    func fetchLoadForKey(_ URL: Foundation.URL) -> MLImageCallbacks? {
         var fetchLoad: MLImageCallbacks?
 //        dispatch_sync(barrierQueue, { () -> Void in
             fetchLoad = self.fetchLoads[URL]
@@ -119,30 +119,30 @@ extension MLImageDowloader {
 
 
 // MARK: - NSURLSessionDataDelegate 实现
-class MLImageDownloaderSessionHandler: NSObject,NSURLSessionDataDelegate {
+class MLImageDownloaderSessionHandler: NSObject,URLSessionDataDelegate {
     var downloadHolder: MLImageDowloader?
     /**
      This method is exposed since the compiler requests. Do not call it.
      */
-    internal func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveResponse response: NSURLResponse, completionHandler: (NSURLSessionResponseDisposition) -> Void) {
+    internal func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         
-        completionHandler(NSURLSessionResponseDisposition.Allow)
+        completionHandler(Foundation.URLSession.ResponseDisposition.allow)
     }
     
     /**
      This method is exposed since the compiler requests. Do not call it.
      */
-    internal func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
+    internal func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         
         guard let downloader = downloadHolder else {
             return
         }
         //添加数据
-        if let URL = dataTask.originalRequest?.URL, fetchLoad = downloader.fetchLoadForKey(URL) {
-            fetchLoad.responseData.appendData(data)
+        if let URL = dataTask.originalRequest?.url, let fetchLoad = downloader.fetchLoadForKey(URL) {
+            fetchLoad.responseData.append(data)
             for callbackPair in fetchLoad.callbacks {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    callbackPair.progressBlock?(receivedSize: Int64(fetchLoad.responseData.length), totalSize: dataTask.response!.expectedContentLength, originData: data)
+                DispatchQueue.main.async(execute: { () -> Void in
+                    callbackPair.progressBlock?(Int64(fetchLoad.responseData.length), dataTask.response!.expectedContentLength, data as Optional<NSData>)
                 })
             }
         }
@@ -151,7 +151,7 @@ class MLImageDownloaderSessionHandler: NSObject,NSURLSessionDataDelegate {
     /**
      This method is exposed since the compiler requests. Do not call it.
      */
-    internal func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
+    internal func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         self.callBackImage(task)
     }
     
@@ -159,13 +159,13 @@ class MLImageDownloaderSessionHandler: NSObject,NSURLSessionDataDelegate {
     /**
      This method is exposed since the compiler requests. Do not call it.
      */
-    internal func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+    internal func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-            let credential = NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!)
-            completionHandler(.UseCredential, credential)
+            let credential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+            completionHandler(.useCredential, credential)
             return
         }
-        completionHandler(.PerformDefaultHandling, nil)
+        completionHandler(.performDefaultHandling, nil)
     }
     
     /**
@@ -173,15 +173,15 @@ class MLImageDownloaderSessionHandler: NSObject,NSURLSessionDataDelegate {
      
      - parameter task: <#task description#>
      */
-    func callBackImage(task:NSURLSessionTask) {
+    func callBackImage(_ task:URLSessionTask) {
         guard let downloader = downloadHolder else {
             return
         }
         
-        if let URL = task.originalRequest?.URL, fetchLoad = downloader.fetchLoadForKey(URL) {
+        if let URL = task.originalRequest?.url, let fetchLoad = downloader.fetchLoadForKey(URL) {
             for callbackPair in fetchLoad.callbacks {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    callbackPair.completionHander?(image: UIImage().ml_image(fetchLoad.responseData, scale: 1), error: nil, cacheType:nil, imageURL: URL, originalData: fetchLoad.responseData)
+                DispatchQueue.main.async(execute: { () -> Void in
+                    callbackPair.completionHander?(UIImage().ml_image(fetchLoad.responseData, scale: 1), nil, nil, URL, fetchLoad.responseData)
                 })
             }
         }

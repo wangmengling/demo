@@ -10,7 +10,7 @@ import UIKit
 
 
 extension UIImageView {
-    func set_MLImageWithURL(URL:NSURL,
+    func set_MLImageWithURL(_ URL:Foundation.URL,
                             placeHolder:UIImage? = nil,
                             progressBlock:MLImageDownloaderProgressBlock? = nil,
                             completionHandler:MLImageDownloaderCompletionHandler? = nil) -> Void {

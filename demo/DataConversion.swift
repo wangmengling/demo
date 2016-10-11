@@ -16,7 +16,7 @@ public struct DataConversion<Element:DataConversionProtocol> {
 // MARK: - JSON Map
 extension DataConversion {
     /// Maps a JSON dictionary to an object that conforms to Mappable
-    public func map(JSONDictionary: [String : AnyObject]) -> E? {
+    public func map(_ JSONDictionary: [String : AnyObject]) -> E? {
         let dataMap = DataMap(JSONDictionary: JSONDictionary)
         if var object = E() {
             object.mapping(dataMap)
@@ -25,7 +25,7 @@ extension DataConversion {
         return nil
     }
     
-    public func map(JSON:AnyObject?) -> E? {
+    public func map(_ JSON:AnyObject?) -> E? {
         if let JSON = JSON as? [String : AnyObject] {
             return map(JSON)
         }
@@ -35,26 +35,26 @@ extension DataConversion {
 
 // MARK: - Array
 extension DataConversion {
-    public func mapArray(JSONDictionaryArray: [[String : AnyObject]]) -> [E]? {
+    public func mapArray(_ JSONDictionaryArray: [[String : AnyObject]]) -> [E]? {
         let result = JSONDictionaryArray.flatMap(map)
         return result
     }
     
-    public func mapArray(JSON: AnyObject?) -> [E] {
+    public func mapArray(_ JSON: AnyObject?) -> [E] {
         if let JSONArray = JSON as? [[String : AnyObject]] {
-            return mapArray(JSONArray)
+            return mapArray(JSONArray)!
         }
         return []
     }
     
-    public func mapArray(JSONString:String) -> [E] {
+    public func mapArray(_ JSONString:String) -> [E] {
         if let JSONArray = self.parseJSONString(JSONString){
             return mapArray(JSONArray)
         }
         return []
     }
     
-    public func mapArray(JSONData:NSData) -> [E] {
+    public func mapArray(_ JSONData:Data) -> [E] {
         if let JSONArray = self.parseJSONData(JSONData){
             return mapArray(JSONArray)
         }
@@ -64,12 +64,12 @@ extension DataConversion {
 
 // MARK: - NO JSON  ->  JSON
 extension DataConversion {
-    public func parseJSONString(JSON: String) -> AnyObject? {
-        let data = JSON.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+    public func parseJSONString(_ JSON: String) -> AnyObject? {
+        let data = JSON.data(using: String.Encoding.utf8, allowLossyConversion: true)
         if let data = data {
             let parsedJSON: AnyObject?
             do {
-                parsedJSON = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
+                parsedJSON = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
             } catch let error {
                 print(error)
                 parsedJSON = nil
@@ -80,10 +80,10 @@ extension DataConversion {
         return nil
     }
     
-    public func parseJSONData(JSON: NSData) -> AnyObject? {
+    public func parseJSONData(_ JSON: Data) -> AnyObject? {
         let parsedJSON: AnyObject?
         do {
-            parsedJSON = try NSJSONSerialization.JSONObjectWithData(JSON, options: NSJSONReadingOptions.AllowFragments)
+            parsedJSON = try JSONSerialization.jsonObject(with: JSON, options: JSONSerialization.ReadingOptions.allowFragments)
         } catch let error {
             print(error)
             parsedJSON = nil
@@ -98,34 +98,34 @@ extension DataConversion {
 
 //---------------- infix operator <-> {}
 //---------------- String Int ......
-public func <-> <T>(inout field: T!, right: DataMap) {
+public func <-> <T>(field: inout T!, right: DataMap) {
     modelOrJson(&field, right: right)
 }
 
-public func <-> <T>(inout field: T?, right: DataMap) {
+public func <-> <T>(field: inout T?, right: DataMap) {
     modelOrJson(&field, right: right)
 }
 
-public func <-> <T>(inout field: T, right: DataMap) {
+public func <-> <T>(field: inout T, right: DataMap) {
     modelOrJson(&field, right: right)
 }
 
 //----------------- DataConversionProtocol
-public func <-> <T:DataConversionProtocol>(inout field: T, right: DataMap) {
+public func <-> <T:DataConversionProtocol>(field: inout T, right: DataMap) {
     guard let object:T = DataConversion().map(right.value()) else {
         return
     }
     field = object
 }
 
-public func <-> <T:DataConversionProtocol>(inout field: T!, right: DataMap) {
+public func <-> <T:DataConversionProtocol>(field: inout T!, right: DataMap) {
     guard let object:T = DataConversion().map(right.value()) else {
         return
     }
     field = object
 }
 
-public func <-> <T:DataConversionProtocol>(inout field: T?, right: DataMap) {
+public func <-> <T:DataConversionProtocol>(field: inout T?, right: DataMap) {
     guard let object:T = DataConversion().map(right.value()) else {
         return
     }
@@ -133,7 +133,7 @@ public func <-> <T:DataConversionProtocol>(inout field: T?, right: DataMap) {
 }
 
 //----------------- Array<TDataConversionProtocol>
-public func <-> <T:DataConversionProtocol>(inout field: Array<T>, right: DataMap) {
+public func <-> <T:DataConversionProtocol>(field: inout Array<T>, right: DataMap) {
     guard let object:Array<T> = DataConversion().mapArray(right.value()) else {
         return
     }
@@ -141,7 +141,7 @@ public func <-> <T:DataConversionProtocol>(inout field: Array<T>, right: DataMap
 }
 
 /// Object of Raw Representable type
-public func <-> <T: RawRepresentable>(inout left: T, right: DataMap) {
+public func <-> <T: RawRepresentable>(left: inout T, right: DataMap) {
     guard let raw = right.currentValue as? T.RawValue  else{
         return
     }
@@ -152,7 +152,7 @@ public func <-> <T: RawRepresentable>(inout left: T, right: DataMap) {
 }
 
 /// Optional Object of Raw Representable type
-public func <-> <T: RawRepresentable>(inout left: T?, right: DataMap) {
+public func <-> <T: RawRepresentable>(left: inout T?, right: DataMap) {
     guard let raw = right.currentValue as? T.RawValue  else{
         return
     }
@@ -161,7 +161,7 @@ public func <-> <T: RawRepresentable>(inout left: T?, right: DataMap) {
 }
 
 /// Implicitly Unwrapped Optional Object of Raw Representable type
-public func <-> <T: RawRepresentable>(inout left: T!, right: DataMap) {
+public func <-> <T: RawRepresentable>(left: inout T!, right: DataMap) {
     guard let raw = right.currentValue as? T.RawValue  else{
         return
     }
@@ -171,9 +171,9 @@ public func <-> <T: RawRepresentable>(inout left: T!, right: DataMap) {
     left = value
 }
 
-infix operator <-> {}
+infix operator <->
 
-func modelOrJson <T>(inout field: T, right: DataMap) {
+func modelOrJson <T>(_ field: inout T, right: DataMap) {
     if right.toJSON == false {
         guard let object:T = right.value() else {
             return
@@ -184,14 +184,14 @@ func modelOrJson <T>(inout field: T, right: DataMap) {
     }
 }
 
-func toJSON<T>(field: T?, map: DataMap) {
+func toJSON<T>(_ field: T?, map: DataMap) {
     if map.toJSON == false {
         return
     }
     guard let value = field else {
         return
     }
-    if let x = value as? AnyObject where false
+    if let x = value as? AnyObject , false
         || x is NSNumber // Basic types
         || x is Bool
         || x is Int

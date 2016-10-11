@@ -33,8 +33,8 @@ class SecondViewController: UIViewController {
     }
     */
     
-    override func viewWillAppear(animated: Bool) {
-        let url = NSURL(string: "http://gtb.baidu.com/HttpService/get?p=dHlwZT1pbWFnZS9qcGVnJm49dmlzJnQ9YWRpbWcmYz10YjppZyZyPTQ5NzI4NDUwNCwzNjU5MjAxODMy")
+    override func viewWillAppear(_ animated: Bool) {
+        let url = URL(string: "http://gtb.baidu.com/HttpService/get?p=dHlwZT1pbWFnZS9qcGVnJm49dmlzJnQ9YWRpbWcmYz10YjppZyZyPTQ5NzI4NDUwNCwzNjU5MjAxODMy")
         self.imageView.set_MLImageWithURL(url!)
     }
 

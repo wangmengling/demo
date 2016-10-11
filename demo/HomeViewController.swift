@@ -29,7 +29,7 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
@@ -53,7 +53,7 @@ extension HomeViewController {
         
 //        self.backScrollView.addSubview(caruselView)
         caruselView = InfiniteScrollView(rhs: [Top(0),Left(0),Width(self.view.frame.width),Height(130),Right(0)])
-        caruselView.backgroundColor = UIColor.redColor()
+        caruselView.backgroundColor = UIColor.red
         caruselView.viewTapBlocks { (object) in
             print(object)
         }
@@ -65,8 +65,8 @@ extension HomeViewController {
             Height(130),
             Right(0)
         ]
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
-        dispatch_after(time, dispatch_get_main_queue()) {
+        let time = DispatchTime.now() + Double(Int64(1.0 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: time) {
             self.caruselView.addIn(imageArray)
         }
     }

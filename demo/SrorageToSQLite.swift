@@ -29,7 +29,7 @@ struct SrorageToSQLite {
 extension SrorageToSQLite {
     
     
-    func filter(predicate:String) -> String{
+    func filter(_ predicate:String) -> String{
         var filter = ""
         if predicate.characters.count > 1 {
             filter = " Where "+predicate
@@ -37,17 +37,17 @@ extension SrorageToSQLite {
         return filter
     }
     
-    mutating func sorted(property: String, ascending: Bool = true) {
+    mutating func sorted(_ property: String, ascending: Bool = true) {
         
     }
 }
 
 extension SrorageToSQLite {
-    func count(object:E,filter:String = "") -> Int {
+    func count(_ object:E,filter:String = "") -> Int {
         var count = 0
         //关键字 来计算count
         let objectsMirror = Mirror(reflecting: object)
-        let countSql = "SELECT COUNT(*) AS count FROM \(String(objectsMirror.subjectType)) \(self.filter(filter))"
+        let countSql = "SELECT COUNT(*) AS count FROM \(String(describing: objectsMirror.subjectType)) \(self.filter(filter))"
         count = sqliteManager.count(countSql)
         return count
     }
@@ -56,12 +56,12 @@ extension SrorageToSQLite {
 // MARK: - SelectTable
 
 extension SrorageToSQLite {
-    mutating func objectsToSQLite(tableName:String,filter:String = "",sorted:(String,Bool) = ("",false),limit:(Int,Int) = (0,10)) -> [[String : AnyObject]]? {
+    mutating func objectsToSQLite(_ tableName:String,filter:String = "",sorted:(String,Bool) = ("",false),limit:(Int,Int) = (0,10)) -> [[String : AnyObject]]? {
         let selectSQL = "SELECT * FROM  \(tableName)) \(self.filter(filter));"
         return sqliteManager.fetchArray(selectSQL)
     }
     
-    mutating func objectToSQLite(tableName:String,filter:String = "") -> [String : AnyObject]? {
+    mutating func objectToSQLite(_ tableName:String,filter:String = "") -> [String : AnyObject]? {
         let objectSQL = "SELECT * FROM  \(tableName) \(self.filter(filter)) LIMIT 0,1"
         return sqliteManager.fetchArray(objectSQL).last
     }
@@ -69,7 +69,7 @@ extension SrorageToSQLite {
 
 // MARK: - Update Data To Table
 extension SrorageToSQLite {
-    func update(object:E) -> Bool {
+    func update(_ object:E) -> Bool {
         
         return true
     }
@@ -83,7 +83,7 @@ extension SrorageToSQLite {
 
 // MARK: - Insert Data To Table
 extension SrorageToSQLite {
-    func insert(object:E) -> Bool {
+    func insert(_ object:E) -> Bool {
         
         let objectsMirror = Mirror(reflecting: object)
         let property = objectsMirror.children
@@ -93,10 +93,10 @@ extension SrorageToSQLite {
         
         
         if let b = AnyBidirectionalCollection(property) {
-                for i in b.endIndex.advancedBy(-20, limit: b.startIndex)..<b.endIndex {
+                for i in b.index(b.endIndex, offsetBy: -20, limitedBy: b.startIndex)..<b.endIndex {
                     let child = b[i]
                     
-                    guard let columnValue:String = self.proToColumnValues(child.value) where columnValue.characters.count > 0  else  {
+                    guard let columnValue:String = self.proToColumnValues(child.value) , columnValue.characters.count > 0  else  {
                         continue
 //                        return false
                     }
@@ -110,7 +110,7 @@ extension SrorageToSQLite {
             values = values.subString(0, length: values.characters.count - 1)
         }
         
-        let insertSQL = "INSERT INTO \(String(objectsMirror.subjectType)) (\(columns))  VALUES (\(values));"
+        let insertSQL = "INSERT INTO \(String(describing: objectsMirror.subjectType)) (\(columns))  VALUES (\(values));"
         return sqliteManager.execSQL(insertSQL)
     }
     
@@ -123,7 +123,7 @@ extension SrorageToSQLite {
      
      - returns: column values
      */
-    func proToColumnValues(value:Any) -> String{
+    func proToColumnValues(_ value:Any) -> String{
         
         guard let x:Any? = value else {
             return ""
@@ -160,9 +160,9 @@ extension SrorageToSQLite {
      
      - returns: Bool
      */
-    func tableIsExists(object:E) -> Bool {
+    func tableIsExists(_ object:E) -> Bool {
         let objectsMirror = Mirror(reflecting: object)
-        let sqls = "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='\(String(objectsMirror.subjectType))'"
+        let sqls = "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='\(String(describing: objectsMirror.subjectType))'"
         return sqliteManager.execSQL(sqls)
     }
     
@@ -171,7 +171,7 @@ extension SrorageToSQLite {
      
      - parameter object: E object
      */
-    func createTable(object:E) -> Bool {
+    func createTable(_ object:E) -> Bool {
         /// 1.反射获取属性
         let objectsMirror = Mirror(reflecting: object)
         let property = objectsMirror.children
@@ -184,7 +184,7 @@ extension SrorageToSQLite {
         if column.characters.count > 5 {
             column = column.subString(0, length: column.characters.count - 1)
         }
-        let createTabelSQL = "Create TABLE if not exists \(String(objectsMirror.subjectType))(\(column));"
+        let createTabelSQL = "Create TABLE if not exists \(String(describing: objectsMirror.subjectType))(\(column));"
         
         /// 3.执行createTableSql
         return sqliteManager.execSQL(createTabelSQL)
@@ -214,7 +214,7 @@ extension SrorageToSQLite {
      
      - returns: SQL
      */
-    func proToColumn(label:String,value:Any) -> String {
+    func proToColumn(_ label:String,value:Any) -> String {
         var string = ""
         let columuType = self.typeReplace(value)
         switch columuType {
@@ -239,7 +239,7 @@ extension SrorageToSQLite {
      
      - returns: Column Type
      */
-    func typeReplace(value:Any) -> ColumuType {
+    func typeReplace(_ value:Any) -> ColumuType {
         guard let x:Any = value else {
             return ColumuType.NULL
         }

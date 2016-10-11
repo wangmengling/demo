@@ -34,8 +34,8 @@ class Dispatcher {
     - parameter callback:
     - returns: key
     */
-    func register(callback:DispatcherCallback)->String{
-        _lastID++
+    func register(_ callback:@escaping DispatcherCallback)->String{
+        _lastID += 1
         let key:String = "\(_prefix)\(_lastID)"
         self._callbacks[key] = callback
         return key
@@ -45,8 +45,8 @@ class Dispatcher {
     移除注册
     - parameter key:
     */
-    func unregisterWithKey(key:String){
-        self._callbacks.removeValueForKey(key)
+    func unregisterWithKey(_ key:String){
+        self._callbacks.removeValue(forKey: key)
     }
     
     //MARK: 分发数据，更新数据
@@ -55,7 +55,7 @@ class Dispatcher {
     
     - parameter payLoad: <#payLoad description#>
     */
-    func dispatch(payLoad:PayLoad){
+    func dispatch(_ payLoad:PayLoad){
 //        assert(!self._isDispatching, "'Dispatch.dispatch(...): Cannot dispatch in the middle of a dispatch.'")
         self._startDispatching(payLoad)
         do{
@@ -75,7 +75,7 @@ class Dispatcher {
      
      - parameter key: key
      */
-    func _invokeCallback(key:String) {
+    func _invokeCallback(_ key:String) {
         self._isPending[key] = true
         let callback:DispatcherCallback = self._callbacks[key] as! DispatcherCallback
         callback(self._pendingPayload!)
@@ -89,7 +89,7 @@ class Dispatcher {
     
     - parameter payLoad: 实体
     */
-    func _startDispatching(payLoad:PayLoad){
+    func _startDispatching(_ payLoad:PayLoad){
         //
         for key in self._callbacks.keys {
             self._isPending[key] = false;

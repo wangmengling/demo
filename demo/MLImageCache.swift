@@ -9,7 +9,7 @@
 import UIKit
 
 public enum CacheType {
-    case None, Memory, Disk
+    case none, memory, disk
 }
 
 private let cacheReverseDNS = "com.jackWang.ML.ImageCache"
@@ -23,12 +23,12 @@ class MLImageCache {
     }
     
     init(){
-        fileManager = NSFileManager.defaultManager()
+        fileManager = FileManager.default
         
-        let dstPath =  NSSearchPathForDirectoriesInDomains(.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).first!
-        diskCachePath = (dstPath as NSString).stringByAppendingPathComponent(cacheReverseDNS)
+        let dstPath =  NSSearchPathForDirectoriesInDomains(.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first!
+        diskCachePath = (dstPath as NSString).appendingPathComponent(cacheReverseDNS)
         
-        ioQueue = dispatch_queue_create(cacheIoQueue, DISPATCH_QUEUE_SERIAL)
+        ioQueue = DispatchQueue(label: cacheIoQueue, attributes: [])
         
     }
     
@@ -43,10 +43,10 @@ class MLImageCache {
     }
     
     /// 文件缓存
-    var fileManager:NSFileManager! //文件
+    var fileManager:FileManager! //文件
     let diskCachePath:String  //缓存路径
     
-    private let ioQueue: dispatch_queue_t
+    fileprivate let ioQueue: DispatchQueue
 }
 
 extension MLImageCache {
@@ -56,13 +56,13 @@ extension MLImageCache {
      - parameter key:               imageKey Url String
      - parameter completionHandler: 回调
      */
-    func receiveImageForKey(key:String, completionHandler: ((UIImage?, CacheType!) -> ())?) -> Void {
+    func receiveImageForKey(_ key:String, completionHandler: ((UIImage?, CacheType?) -> ())?) -> Void {
         self.receiveMemeryCacheImageForKey(key) { (image, cacheType) in
             guard let image = image else {
                 self.receiveFileCacheImageForKey(key, completionHandler: completionHandler)
                 return
             }
-            completionHandler!(image , .Memory)
+            completionHandler!(image , .memory)
         }
     }
     
@@ -73,7 +73,7 @@ extension MLImageCache {
      - parameter imageData: imageData
      - parameter key:       imageKey Url String
      */
-    func storageImage(image:UIImage, originalData:NSData?, key:String, isFileCache:Bool) -> Void {
+    func storageImage(_ image:UIImage, originalData:Data?, key:String, isFileCache:Bool) -> Void {
         self.storageMemeryCacheImage(image, key: key)
         if isFileCache {
             self.storageFileCacheImage(image, originalData: originalData, key: key)
@@ -90,7 +90,7 @@ extension MLImageCache {
      - parameter imageData: imageData
      - parameter key:       imageKey Url String
      */
-    func storageMemeryCacheImage(image:UIImage, key:String) -> Void {
+    func storageMemeryCacheImage(_ image:UIImage, key:String) -> Void {
         self.memoryCache.setObject(image, forKey: key)
     }
     
@@ -100,9 +100,9 @@ extension MLImageCache {
      - parameter key:               imageKey Url String
      - parameter completionHandler: completionHandler
      */
-    func receiveMemeryCacheImageForKey(key:String, completionHandler: ((UIImage?, CacheType!) -> ())?) -> Void {
-        let image = self.memoryCache.objectForKey(key) as? UIImage
-        completionHandler!(image , .Memory)
+    func receiveMemeryCacheImageForKey(_ key:String, completionHandler: ((UIImage?, CacheType?) -> ())?) -> Void {
+        let image = self.memoryCache.object(forKey: key) as? UIImage
+        completionHandler!(image , .memory)
     }
 }
 
@@ -114,20 +114,20 @@ extension MLImageCache {
      - parameter data: image
      - parameter key:  key url string
      */
-    func storageFileCacheImage(image:UIImage, originalData:NSData?, key:String) -> Void {
-        dispatch_async(ioQueue) {
+    func storageFileCacheImage(_ image:UIImage, originalData:Data?, key:String) -> Void {
+        ioQueue.async {
             if let data = originalData {
-                if !self.fileManager.fileExistsAtPath(self.diskCachePath) {
+                if !self.fileManager.fileExists(atPath: self.diskCachePath) {
                     do {
-                        try self.fileManager.createDirectoryAtPath(self.diskCachePath, withIntermediateDirectories: true, attributes: nil)
+                        try self.fileManager.createDirectory(atPath: self.diskCachePath, withIntermediateDirectories: true, attributes: nil)
                     } catch _ {}
                 }
-                self.fileManager.createFileAtPath(self.cachePathForKey(key), contents: data, attributes: nil)
+                self.fileManager.createFile(atPath: self.cachePathForKey(key), contents: data, attributes: nil)
                 print(self.cachePathForKey(key))
-                print(NSData(contentsOfFile: self.cachePathForKey(key)))
+                print(try? Data(contentsOf: URL(fileURLWithPath: self.cachePathForKey(key))))
             }
         }
-        print(NSData(contentsOfFile: self.cachePathForKey(key)))
+        print(try? Data(contentsOf: URL(fileURLWithPath: self.cachePathForKey(key))))
     }
     
     /**
@@ -136,15 +136,15 @@ extension MLImageCache {
      - parameter key:               url String
      - parameter completionHandler: completionHandler description
      */
-    func receiveFileCacheImageForKey(key:String, completionHandler: ((UIImage?, CacheType!) -> ())?) -> Void {
+    func receiveFileCacheImageForKey(_ key:String, completionHandler: ((UIImage?, CacheType?) -> ())?) -> Void {
 //        let queue = dispatch_queue_create("tssssssss", DISPATCH_QUEUE_SERIAL)
-        dispatch_async(ioQueue) {
+        ioQueue.async {
             guard let image  = self.diskImageForKey(key) else {
-                completionHandler!(nil , .Memory)
+                completionHandler!(nil , .memory)
                 return
             }
             self.storageMemeryCacheImage(image, key: key)
-            completionHandler!(image , .Memory)
+            completionHandler!(image , .memory)
         }
     }
 }
@@ -158,11 +158,11 @@ extension MLImageCache {
      
      - returns: cache path
      */
-    func cachePathForKey(key: String) -> String {
-        return (diskCachePath as NSString).stringByAppendingPathComponent(key.ml_MD5)
+    func cachePathForKey(_ key: String) -> String {
+        return (diskCachePath as NSString).appendingPathComponent(key.ml_MD5)
     }
     
-    func diskImageForKey(key: String) -> UIImage? {
+    func diskImageForKey(_ key: String) -> UIImage? {
         guard let data = diskImageDataForKey(key) else {
             return nil
         }
@@ -172,8 +172,8 @@ extension MLImageCache {
         return image
     }
     
-    func diskImageDataForKey(key: String) -> NSData? {
+    func diskImageDataForKey(_ key: String) -> Data? {
         let filePath = cachePathForKey(key)
-        return NSData(contentsOfFile: filePath)
+        return (try? Data(contentsOf: URL(fileURLWithPath: filePath)))
     }
 }

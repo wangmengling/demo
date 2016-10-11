@@ -30,11 +30,11 @@ struct TopicssModel {
 }
 
 enum TopicVisitCountEnum: Int {
-    case Default = 0
-    case One = 1
-    case Two = 2
-    case Three = 8661
-    case Four = 1499
+    case `default` = 0
+    case one = 1
+    case two = 2
+    case three = 8661
+    case four = 1499
 }
 
 struct TopicModel: Mappable{
@@ -56,7 +56,7 @@ struct TopicModel: Mappable{
         
     }
     
-    mutating func mapping(map: Map) {
+    mutating func mapping(_ map: Map) {
         author <- map["author"]
         author_id <- map["author_id"]
         tab <- map["tab"]
@@ -74,7 +74,7 @@ struct TopicsssModel:DataConversionProtocol {
     var tab: String!
     var content: String?
     var title: String?
-    var visit_count: TopicVisitCountEnum? = TopicVisitCountEnum.Default
+    var visit_count: TopicVisitCountEnum? = TopicVisitCountEnum.default
 //    var reply_count: Int = 0
 //    var top:Bool = false
     
@@ -87,7 +87,7 @@ struct TopicsssModel:DataConversionProtocol {
         
     }
     
-    mutating func mapping(map: DataMap) {
+    mutating func mapping(_ map: DataMap) {
 //        author <-> map["author"]
         author_id <-> map["author_id"]
         tab <-> map["tab"]

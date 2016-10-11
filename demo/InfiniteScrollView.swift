@@ -9,7 +9,7 @@
 import UIKit
 import EasyPeasy
 
-public class InfiniteScrollView: UIScrollView {
+open class InfiniteScrollView: UIScrollView {
 
     /*
     // Only override drawRect: if you perform custom drawing.
@@ -18,20 +18,20 @@ public class InfiniteScrollView: UIScrollView {
         // Drawing code
     }
     */
-    private var imageViewTapBlock:ViewTapBlock?
-    private var dataArray:Array<String> = Array()
+    fileprivate var imageViewTapBlock:ViewTapBlock?
+    fileprivate var dataArray:Array<String> = Array()
 //    private var count:Int = 0
     var rhs:[Attribute]!
     
     convenience init(rhs: [Attribute]) {
         self.init()
         self.rhs = rhs
-        self.pagingEnabled = true
+        self.isPagingEnabled = true
         self.showsVerticalScrollIndicator = false
         self.showsHorizontalScrollIndicator = false
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
 //        self <- self.rhs
         //grab the current content offset (top-left corner)
@@ -55,14 +55,14 @@ public class InfiniteScrollView: UIScrollView {
     
     
     
-    func addIn(dataArray: [String]?) {
+    func addIn(_ dataArray: [String]?) {
         //the max number of indicators
         guard let dataArray = dataArray  else {
             return
         }
         self.dataArray = dataArray
         //the gap between indicators
-        var count = self.dataArray.count
+        let count = self.dataArray.count
         let gap:CGFloat = self.frame.width
         
         //initial offset because we're positioning from the center of each indicator's view
@@ -101,10 +101,10 @@ public class InfiniteScrollView: UIScrollView {
         }
         
         //update infiniteScrollView contentSize
-        self.contentSize = CGSizeMake(CGFloat(width) + self.frame.size.width, 0)
+        self.contentSize = CGSize(width: CGFloat(width) + self.frame.size.width, height: 0)
     }
     
-    func createIndicator(index: Int, at point: CGPoint) {
+    func createIndicator(_ index: Int, at point: CGPoint) {
         
         var dataIndex = index
         
@@ -115,21 +115,21 @@ public class InfiniteScrollView: UIScrollView {
         let text = self.dataArray[dataIndex]
         
         var imageView = UIImageTapView()
-        imageView.value = text
+        imageView.value = text as AnyObject?
         imageView.viewTapBlocks { (object) in
             self.imageViewTapBlock!(object)
         }
         let left = CGFloat(index) * self.frame.size.width
         imageView.image = UIImage()
-        imageView.contentMode = UIViewContentMode.ScaleToFill
+        imageView.contentMode = UIViewContentMode.scaleToFill
         
         imageView.frame.size = self.frame.size
-        imageView.frame.origin = CGPointMake(left, 0)
+        imageView.frame.origin = CGPoint(x: left, y: 0)
         self.addSubview(imageView)
-        imageView.set_MLImageWithURL(NSURL(string: text)!)
+        imageView.set_MLImageWithURL(URL(string: text)!)
     }
     
-    func viewTapBlocks(viewTapBlock:ViewTapBlock) -> Void {
+    func viewTapBlocks(_ viewTapBlock:@escaping ViewTapBlock) -> Void {
         self.imageViewTapBlock = viewTapBlock
     }
 }

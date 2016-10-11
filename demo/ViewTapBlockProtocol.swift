@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias ViewTapBlock  = AnyObject? -> Void
+typealias ViewTapBlock  = (AnyObject?) -> Void
 
 protocol ViewTapBlockProtocol {
     var value:AnyObject?{get set}
@@ -17,8 +17,8 @@ protocol ViewTapBlockProtocol {
 }
 
 extension ViewTapBlockProtocol where Self:UIView{
-    mutating func viewTapBlocks(viewBlock:ViewTapBlock) -> Void {
-        self.userInteractionEnabled = true
+    mutating func viewTapBlocks(_ viewBlock:@escaping ViewTapBlock) -> Void {
+        self.isUserInteractionEnabled = true
         let viewTap = UITapGestureRecognizer(target: self, action:#selector(UIImageTapView.tapAction as (UIImageTapView) -> () -> Void))
         self.addGestureRecognizer(viewTap)
         self.viewTapBlock = viewBlock
